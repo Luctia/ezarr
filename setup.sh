@@ -33,9 +33,11 @@ radarr_id=$(sudo cat /etc/passwd | grep radarr | cut -c 10-13)
 lidarr_id=$(sudo cat /etc/passwd | grep lidarr | cut -c 10-13)
 prowlarr_id=$(sudo cat /etc/passwd | grep prowlarr | cut -c 12-15)
 qbit_id=$(sudo cat /etc/passwd | grep qbittorrent | cut -c 15-18)
+group_id=$(sudo cat /etc/group | grep mediacenter | cut -c 15-18)
 
 echo "SONARR_UID=${sonarr_id}" >> .env
 echo "RADARR_UID=${radarr_id}" >> .env
 echo "LIDARR_UID=${lidarr_id}" >> .env
 echo "PROWLARR_UID=${prowlarr_id}" >> .env
 echo "QBIT_UID=${qbit_id}" >> .env
+echo "MEDIACENTER_GID=${group_id}" >> .env
