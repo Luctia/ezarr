@@ -8,9 +8,11 @@ Ezarr is a project built to make it EZ to deploy a Servarr mediacenter, featurin
 - PleX
 
 ## Using
-1. To get started, clone the repository in a directory of your choosing.
+1. To get started, clone the repository in a directory of your choosing. **Note: this will be where
+   your installation and media will be as well, so think about this a bit.**
 2. Copy `.env.sample` to a real `.env`: `$ cp .env.sample .env`.
-3. Set the environment variables to your liking.
+3. Set the environment variables to your liking. Note that `ROOT_DIR` should be the directory you
+   have cloned this in.
 4. Run `setup.sh` as superuser. This will set up your users, a system of directories, ensure
    permissions are set correctly and sets some more environment variables for docker compose.
 5. Run `docker compose up`
