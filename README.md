@@ -6,8 +6,12 @@ features:
   download this if connected to Prowlarr and qBittorrent. It can also reorganize the media you
   already own in order to create a more uniformly formatted collection.
 - [Radarr](https://radarr.video/) is like Sonarr, but for movies.
-- [Lidarr](https://lidarr.audio/) is like Radarr and Sonarr, but for music.
-- [Readarr](https://readarr.com/) is like Radarr, Sonarr and Lidarr but for books.
+- [Lidarr](https://lidarr.audio/) is like Sonarr, but for music.
+- [Readarr](https://readarr.com/) is like Sonarr, but for books.
+- [Mylar3](https://github.com/mylar3/mylar3) is like Sonarr, but for comic books. This one is a bit
+  tricky to set up, so do so at your own risk. In order to connect this to your Prowlarr container,
+  the process within Prowlarr is the same as for the other containers (add app). You'll have to add
+  an API key within Mylar3, yourself.
 - [Prowlarr](https://wiki.servarr.com/prowlarr) can keep track of indexers, which are services that
   keep track of Torrent or UseNet links. One can search an indexer for certain content and find a
   where to download this. **Note**: when adding an indexer, please do not set the "seed ratio" to

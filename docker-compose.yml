@@ -108,6 +108,20 @@ services:
       - 8787:8787
     restart: unless-stopped
 
+  mylar3:
+    image: lscr.io/linuxserver/mylar3:latest
+    container_name: mylar3
+    environment:
+      - PUID=${MYLAR_UID}
+      - PGID=${MEDIACENTER_GID}
+      - UMASK=002
+    volumes:
+      - ${ROOT_DIR}/docker/mylar-config:/config
+      - ${ROOT_DIR}/data:/data
+    ports:
+      - 8090:8090
+    restart: unless-stopped
+
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop
     container_name: prowlarr
