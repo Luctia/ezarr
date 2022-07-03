@@ -1,13 +1,25 @@
 # EZARR
 Ezarr is a project built to make it EZ to deploy a Servarr mediacenter on an Ubuntu server. It
 features:
-- [Sonarr](https://sonarr.tv/)
-- [Radarr](https://radarr.video/)
-- [Lidarr](https://lidarr.audio/)
-- [Prowlarr](https://wiki.servarr.com/prowlarr)
-- [qBittorrent](https://www.qbittorrent.org/)
-- [PleX](https://www.plex.tv/)
-- [Jellyfin](https://jellyfin.org/)
+- [Sonarr](https://sonarr.tv/) is an application to manage TV shows. It is capable of keeping track
+  of what you'd like to watch, at what quality, in which language and more, and can find a place to
+  download this if connected to Prowlarr and qBittorrent.
+- [Radarr](https://radarr.video/) is like Sonarr, but for movies.
+- [Lidarr](https://lidarr.audio/) is like Radarr and Sonarr, but for music.
+- [Prowlarr](https://wiki.servarr.com/prowlarr) can keep track of indexers, which are services that
+  keep track of Torrent or UseNet links. One can search an indexer for certain content and find a
+  where to download this. **Note**: when adding an indexer, please do not set the "seed ratio" to
+  less than 1. Less than 1 means that you upload less than you download. Not only is this
+  unfriendly towards your fellow users, but it can also get you banned from certain indexers.
+- [qBittorrent](https://www.qbittorrent.org/) can download torrents and provides a bunch more
+  features for management.
+- [PleX](https://www.plex.tv/) is a mediaserver. Using this, you get access to a Netflix-like
+  interface across many devices like your laptop or computer, your phone, your TV and more. For
+  some features, you need a [PleX pass](https://www.plex.tv/nl/plex-pass/).
+- [Tautulli](https://tautulli.com/) is a monitoring application for PleX  which can keep track of
+  what has been watched, who watched it, when and where they watched it, and how it was watched.
+- [Jellyfin](https://jellyfin.org/) is an alternative for PleX. Which you'd like to use is a matter
+  of preference, and you *could* even use both, although this is probably a waste of resources.
 
 ## Using
 1. To get started, clone the repository in a directory of your choosing. **Note: this will be where

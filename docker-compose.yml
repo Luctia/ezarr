@@ -15,6 +15,21 @@ services:
       - ${ROOT_DIR}/data/media:/media
     restart: unless-stopped
 
+  tautulli:
+    image: lscr.io/linuxserver/tautulli:latest
+    container_name: tautulli
+    depends_on:
+      - plex
+    environment:
+      - PUID=1000
+      - PGID=${MEDIACENTER_GID}
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${ROOT_DIR}/docker/tautulli-config:/config
+    ports:
+      - 8181:8181
+    restart: unless-stopped
+
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
@@ -22,7 +37,7 @@ services:
       - PUID=1000
       - PGID=${MEDIACENTER_GID}
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/jellyfin-config:/config
       - ${ROOT_DIR}/data/media:/data
