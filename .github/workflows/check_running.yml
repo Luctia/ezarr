@@ -1,0 +1,26 @@
+name: Check running
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Copy environment file
+        run: cp .env.sample .env
+
+      - name: Run setup.sh
+        run: ./setup.sh
+
+      - name: Run docker-compose
+        run: docker-compose up -d
