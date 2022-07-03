@@ -1,21 +1,26 @@
 # EZARR
-Ezarr is a project built to make it EZ to deploy a Servarr mediacenter, featuring:
-- Sonarr
-- Radarr
-- Lidarr
-- Prowlarr
-- qBittorrent
-- PleX
+Ezarr is a project built to make it EZ to deploy a Servarr mediacenter on an Ubuntu server. It
+features:
+- [Sonarr](https://sonarr.tv/)
+- [Radarr](https://radarr.video/)
+- [Lidarr](https://lidarr.audio/)
+- [Prowlarr](https://wiki.servarr.com/prowlarr)
+- [qBittorrent](https://www.qbittorrent.org/)
+- [PleX](https://www.plex.tv/)
+- [Jellyfin](https://jellyfin.org/)
 
 ## Using
 1. To get started, clone the repository in a directory of your choosing. **Note: this will be where
    your installation and media will be as well, so think about this a bit.**
-2. Copy `.env.sample` to a real `.env`: `$ cp .env.sample .env`.
+2. Copy `.env.sample` to a real `.env` by running `$ cp .env.sample .env`.
 3. Set the environment variables to your liking. Note that `ROOT_DIR` should be the directory you
    have cloned this in.
 4. Run `setup.sh` as superuser. This will set up your users, a system of directories, ensure
    permissions are set correctly and sets some more environment variables for docker compose.
-5. Run `docker compose up`
+5. Take a look at the `docker-compose.yml` file. If there are services you would like to ignore
+   (for example, running PleX and Jellyfin at the same time is a bit unusual), you can comment them
+   out by placing `#` in front of the lines. This ensures they are ignored by Docker compose.
+6. Run `docker compose up`.
 
 That's it! Your containers are now up and you can continue to set up the settings in them. Take
 note of the following:
