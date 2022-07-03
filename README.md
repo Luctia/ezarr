@@ -3,9 +3,11 @@ Ezarr is a project built to make it EZ to deploy a Servarr mediacenter on an Ubu
 features:
 - [Sonarr](https://sonarr.tv/) is an application to manage TV shows. It is capable of keeping track
   of what you'd like to watch, at what quality, in which language and more, and can find a place to
-  download this if connected to Prowlarr and qBittorrent.
+  download this if connected to Prowlarr and qBittorrent. It can also reorganize the media you
+  already own in order to create a more uniformly formatted collection.
 - [Radarr](https://radarr.video/) is like Sonarr, but for movies.
 - [Lidarr](https://lidarr.audio/) is like Radarr and Sonarr, but for music.
+- [Readarr](https://readarr.com/) is like Radarr, Sonarr and Lidarr but for books.
 - [Prowlarr](https://wiki.servarr.com/prowlarr) can keep track of indexers, which are services that
   keep track of Torrent or UseNet links. One can search an indexer for certain content and find a
   where to download this. **Note**: when adding an indexer, please do not set the "seed ratio" to

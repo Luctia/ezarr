@@ -93,6 +93,21 @@ services:
       - 8686:8686
     restart: unless-stopped
 
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    environment:
+      - PUID=${READARR_UID}
+      - PGID=${MEDIACENTER_GID}
+      - UMASK=002
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${ROOT_DIR}/docker/readarr-config:/config
+      - ${ROOT_DIR}/data:/data
+    ports:
+      - 8787:8787
+    restart: unless-stopped
+
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop
     container_name: prowlarr
