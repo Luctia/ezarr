@@ -1,6 +1,9 @@
 # EZARR
-Ezarr is a project built to make it EZ to deploy a Servarr mediacenter on an Ubuntu server. It
-features:
+[![Check running](https://github.com/Luctia/ezarr/actions/workflows/check_running.yml/badge.svg)](https://github.com/Luctia/ezarr/actions/workflows/check_running.yml)
+
+Ezarr is a project built to make it EZ to deploy a Servarr mediacenter on an Ubuntu server. The
+badge above means that the shell script and docker-compose file in this repository at least *don't
+crash*. It doesn't necessarily mean it will run well on your system ;) It features:
 - [Sonarr](https://sonarr.tv/) is an application to manage TV shows. It is capable of keeping track
   of what you'd like to watch, at what quality, in which language and more, and can find a place to
   download this if connected to Prowlarr and qBittorrent. It can also reorganize the media you
