@@ -12,7 +12,7 @@ services:
       - PLEX_CLAIM=${PLEX_CLAIM}
     volumes:
       - ${ROOT_DIR}/docker/plex-config:/config
-      - ${ROOT_DIR}/data/media:/media
+      - ${ROOT_DIR}/data/media:/data/media
     restart: unless-stopped
 
   tautulli:
@@ -40,7 +40,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/jellyfin-config:/config
-      - ${ROOT_DIR}/data/media:/data
+      - ${ROOT_DIR}/data/media:/data/media
     ports:
       - 8096:8096
     restart: unless-stopped
