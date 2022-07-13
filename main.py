@@ -1,0 +1,138 @@
+from container_configs import ContainerConfig
+
+services_classed = dict()
+
+
+def take_input(service_name, service_type):
+    choice = input()
+    if choice == 'Y' or choice == 'y' or choice == '':
+        services_classed[service_type].append(service_name)
+    elif choice != 'n' and choice != 'N':
+        print('Invalid input, please enter Y or N. Not adding ' + service_name + ".")
+
+
+def take_boolean_input(default=True):
+    while True:
+        ans = input()
+        if ans == '':
+            return default
+        if ans == 'y' or ans == 'Y':
+            return True
+        if ans == 'n' or ans == 'N':
+            return False
+        print('Please answer with y or n.', end=' ')
+
+
+def take_directory_input():
+    while True:
+        ans = input()
+        if ans[0] == '/':
+            if ans[-1] == '/':
+                return ans[:-2]
+            return ans
+        print('Please make sure the path is absolute, meaning it starts at the root of your filesystem and starts with "/":', end=' ')
+
+
+print('Welcome to the EZarr CLI.')
+print('This CLI will ask you which services you\'d like to use and more.')
+
+print('\n===SERVARR===')
+services_classed['servarr'] = []
+print('Use Sonarr? [Y/n]', end=" ")
+take_input('sonarr', 'servarr')
+print('Use Radarr? [Y/n]', end=" ")
+take_input('radarr', 'servarr')
+print('Use Lidarr? [Y/n]', end=" ")
+take_input('lidarr', 'servarr')
+print('Use Readarr? [Y/n]', end=" ")
+take_input('readarr', 'servarr')
+print('Use Mylar3? [Y/n]', end=" ")
+take_input('mylar3', 'servarr')
+if len(services_classed['servarr']) == 0:
+    print('Warning: no media management services selected.')
+
+print('\n===INDEXERS===')
+services_classed['indexer'] = []
+print('Use Prowlarr? [Y/n]', end=" ")
+take_input('prowlarr', 'indexer')
+if len(services_classed['indexer']) == 0:
+    print('Warning: no indexing service selected.')
+
+print('\n===MEDIA SERVERS===')
+services_classed['ms'] = []
+print('Use PleX? [Y/n]', end=" ")
+take_input('plex', 'ms')
+if services_classed['ms'].__contains__('plex'):
+    print('Use Tautulli? [Y/n]', end=" ")
+    take_input('tautulli', 'ms')
+print('Use Jellyfin? [Y/n]', end=" ")
+take_input('tautulli', 'ms')
+if len(services_classed['ms']) == 0:
+    print('Warning: no media servers selected.')
+
+print('\n===BITTORRENT===')
+services_classed['torrent'] = []
+print('Use qBittorrent? [Y/n]', end=" ")
+take_input('qbittorrent', 'torrent')
+if len(services_classed['torrent']) == 0:
+    print('Warning: no BitTorrent clients selected.')
+
+services = []
+for service_class in services_classed.keys():
+    services.extend(services_classed[service_class])
+if len(services) == 0:
+    print('No services selected. Terminating.')
+    exit(1)
+
+print('\n===CONFIGURATION===')
+print('Please enter your timezone (like "Europe/Amsterdam")', end=' ')
+timezone = input()
+
+root_dir = None
+config_dir = None
+plex_claim = None
+
+
+
+
+
+
+
+print('Would you like to place all configuration and media directories in a single root directory? [Y/n]', end=' ')
+ans = take_boolean_input()
+if ans:
+    print('Please enter your root directory like "/mediacenter":', end=' ')
+    root_dir = take_directory_input()
+    # DONE. CREATE DIRS AND PERMISSIONS
+else:
+    print('Please enter the directory you\'d like to use for configuration files, like /configuration:', end=' ')
+    config_dir = take_directory_input()
+    print('Would you like to manually enter directories for all different media types? [y/N]', end=' ')
+    ans = take_boolean_input(False)
+    if ans:
+        # Pain
+        pass
+    else:
+        print('Please enter the directory you\'d like to use as the root of your content directories like "/media":' ,end=' ')
+        content_root = take_directory_input()
+
+
+
+
+
+
+
+
+compose = open('docker-compose.yml', 'w')
+compose.write(
+    '---\n'
+    'version: "3.1"\n'
+    'services:\n'
+)
+# for service in services:
+#     container_config = ContainerConfig(config_dir, plex_claim, timezone, root_dir)
+#     compose.write(getattr(container_config, service)())
+compose.close()
+print('Process complete. You can now run "docker compose up -d" to start your containers.')
+print('Thank you for using EZarr. If you experience any issues or have feature requests, add them to our issues.')
+exit(0)
