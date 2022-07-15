@@ -20,6 +20,7 @@ crash*. It doesn't necessarily mean it will run well on your system ;) It featur
   where to download this. **Note**: when adding an indexer, please do not set the "seed ratio" to
   less than 1. Less than 1 means that you upload less than you download. Not only is this
   unfriendly towards your fellow users, but it can also get you banned from certain indexers.
+- [Jackett](https://github.com/Jackett/Jackett) is an alternative to Prowlarr. 
 - [qBittorrent](https://www.qbittorrent.org/) can download torrents and provides a bunch more
   features for management.
 - [PleX](https://www.plex.tv/) is a mediaserver. Using this, you get access to a Netflix-like
