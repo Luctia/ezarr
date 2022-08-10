@@ -2,25 +2,18 @@ class ContainerConfig:
     def __init__(self,
                  root_dir,
                  timezone,
-                 config_dir=None,
                  plex_claim='',
-                 movie_dir=None,
-                 tv_dir=None,
-                 music_dir=None,
-                 book_dir=None,
-                 comic_dir=None,
-                 torrent_dir=None
                  ):
         self.root_dir = root_dir
         self.timezone = timezone
-        self.config_dir = config_dir if config_dir is not None else root_dir + '/config'
+        self.config_dir = root_dir + '/config'
         self.plex_claim = plex_claim
-        self.movie_dir = movie_dir if movie_dir is not None else root_dir + '/media/movies'
-        self.tv_dir = tv_dir if tv_dir is not None else root_dir + '/media/tv'
-        self.music_dir = music_dir if music_dir is not None else root_dir + '/media/music'
-        self.book_dir = book_dir if book_dir is not None else root_dir + '/media/books'
-        self.comic_dir = comic_dir if comic_dir is not None else root_dir + '/media/comics'
-        self.torrent_dir = torrent_dir if torrent_dir is not None else root_dir + '/torrents'
+        self.movie_dir = root_dir + '/media/movies'
+        self.tv_dir = root_dir + '/media/tv'
+        self.music_dir = root_dir + '/media/music'
+        self.book_dir = root_dir + '/media/books'
+        self.comic_dir = root_dir + '/media/comics'
+        self.torrent_dir = root_dir + '/data/torrents'
 
     def plex(self):
         return (
@@ -36,7 +29,7 @@ class ContainerConfig:
             '    volumes:\n'
             '      - ' + self.config_dir + '/plex-config:/config\n'
             '      - ' + self.root_dir + '/data/media:/media\n'
-            '    restart: unless-stopped\n'
+            '    restart: unless-stopped\n\n'
         )
 
     def tautulli(self):
@@ -53,8 +46,8 @@ class ContainerConfig:
             '    volumes:\n'
             '      - ' + self.config_dir + '/tautulli-config:/config\n'
             '    ports:\n'
-            '      - 8181:8181\n'
-            '    restart: unless-stopped\n'
+            '      - "8181:8181"\n'
+            '    restart: unless-stopped\n\n'
         )
 
     def jellyfin(self):
@@ -69,28 +62,10 @@ class ContainerConfig:
             '      - TZ=' + self.timezone + '\n'
             '    volumes:\n'
             '      - ' + self.config_dir + '/jellyfin-config:/config\n'
-            '      - ${ROOT_DIR}/data/media:/data\n'
+            '      - ' + self.root_dir + '/data/media:/data\n'
             '    ports:\n'
-            '      - 8096:8096\n'
-            '    restart: unless-stopped\n'
-        )
-
-    def radarr(self):
-        return (
-            '  radarr:\n'
-            '    image: lscr.io/linuxserver/radarr:latest\n'
-            '    container_name: radarr\n'
-            '    environment:\n'
-            '      - PUID=13002\n'
-            '      - PGID=13000\n'
-            '      - UMASK=002\n'
-            '      - TZ=' + self.timezone + '\n'
-            '    volumes:\n'
-            '      - ' + self.config_dir + '/radarr-config:/config\n'
-            '      - ${ROOT_DIR}/data:/data\n'
-            '    ports:\n'
-            '      - 7878:7878\n'
-            '    restart: unless-stopped\n'
+            '      - "8096:8096"\n'
+            '    restart: unless-stopped\n\n'
         )
 
     def sonarr(self):
@@ -105,10 +80,28 @@ class ContainerConfig:
             '      - TZ=' + self.timezone + '\n'
             '    volumes:\n'
             '      - ' + self.config_dir + '/sonarr-config:/config\n'
-            '      - ${ROOT_DIR}/data:/data\n'
+            '      - ' + self.root_dir + '/data:/data\n'
             '    ports:\n'
-            '      - 8989:8989\n'
-            '    restart: unless-stopped\n'
+            '      - "8989:8989"\n'
+            '    restart: unless-stopped\n\n'
+        )
+
+    def radarr(self):
+        return (
+            '  radarr:\n'
+            '    image: lscr.io/linuxserver/radarr:latest\n'
+            '    container_name: radarr\n'
+            '    environment:\n'
+            '      - PUID=13002\n'
+            '      - PGID=13000\n'
+            '      - UMASK=002\n'
+            '      - TZ=' + self.timezone + '\n'
+            '    volumes:\n'
+            '      - ' + self.config_dir + '/radarr-config:/config\n'
+            '      - ' + self.root_dir + '/data:/data\n'
+            '    ports:\n'
+            '      - "7878:7878"\n'
+            '    restart: unless-stopped\n\n'
         )
 
     def lidarr(self):
@@ -123,10 +116,10 @@ class ContainerConfig:
             '      - TZ=' + self.timezone + '\n'
             '    volumes:\n'
             '      - ' + self.config_dir + '/lidarr-config:/config\n'
-            '      - ${ROOT_DIR}/data:/data\n'
+            '      - ' + self.root_dir + '/data:/data\n'
             '    ports:\n'
-            '      - 8686:8686\n'
-            '    restart: unless-stopped\n'
+            '      - "8686:8686"\n'
+            '    restart: unless-stopped\n\n'
         )
 
     def readarr(self):
@@ -141,10 +134,10 @@ class ContainerConfig:
             '      - TZ=' + self.timezone + '\n'
             '    volumes:\n'
             '      - ' + self.config_dir + '/readarr-config:/config\n'
-            '      - ${ROOT_DIR}/data:/data\n'
+            '      - ' + self.root_dir + '/data:/data\n'
             '    ports:\n'
-            '      - 8787:8787\n'
-            '    restart: unless-stopped\n'
+            '      - "8787:8787"\n'
+            '    restart: unless-stopped\n\n'
         )
 
     def mylar3(self):
@@ -158,10 +151,10 @@ class ContainerConfig:
             '      - UMASK=002\n'
             '    volumes:\n'
             '      - ' + self.config_dir + '/mylar-config:/config\n'
-            '      - ${ROOT_DIR}/data:/data\n'
+            '      - ' + self.root_dir + '/data:/data\n'
             '    ports:\n'
-            '      - 8090:8090\n'
-            '    restart: unless-stopped\n'
+            '      - "8090:8090"\n'
+            '    restart: unless-stopped\n\n'
         )
 
     def prowlarr(self):
@@ -177,8 +170,8 @@ class ContainerConfig:
             '    volumes:\n'
             '      - ' + self.config_dir + '/prowlarr-config:/config\n'
             '    ports:\n'
-            '      - 9696:9696\n'
-            '    restart: unless-stopped\n'
+            '      - "9696:9696"\n'
+            '    restart: unless-stopped\n\n'
         )
 
     def qbittorrent(self):
@@ -196,8 +189,8 @@ class ContainerConfig:
             '      - ' + self.config_dir + '/qbittorrent-config:/config\n'
             '      - ' + self.torrent_dir + ':/data/torrents\n'
             '    ports:\n'
-            '      - 8080:8080\n'
-            '      - 6881:6881\n'
-            '      - 6881:6881/udp\n'
-            '    restart: unless-stopped\n'
+            '      - "8080:8080"\n'
+            '      - "6881:6881"\n'
+            '      - "6881:6881/udp"\n'
+            '    restart: unless-stopped\n\n'
         )

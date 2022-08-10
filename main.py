@@ -1,4 +1,5 @@
 from container_configs import ContainerConfig
+from users_groups_setup import UserGroupSetup
 
 services_classed = dict()
 
@@ -28,13 +29,14 @@ def take_directory_input():
         ans = input()
         if ans[0] == '/':
             if ans[-1] == '/':
-                return ans[:-2]
+                return ans[:-1]
             return ans
         print('Please make sure the path is absolute, meaning it starts at the root of your filesystem and starts with "/":', end=' ')
 
 
 print('Welcome to the EZarr CLI.')
-print('This CLI will ask you which services you\'d like to use and more.')
+print('This CLI will ask you which services you\'d like to use and more. If you\'d like more information about a '
+      'certain service, look in the README.')
 
 print('\n===SERVARR===')
 services_classed['servarr'] = []
@@ -66,7 +68,7 @@ if services_classed['ms'].__contains__('plex'):
     print('Use Tautulli? [Y/n]', end=" ")
     take_input('tautulli', 'ms')
 print('Use Jellyfin? [Y/n]', end=" ")
-take_input('tautulli', 'ms')
+take_input('jellyfin', 'ms')
 if len(services_classed['ms']) == 0:
     print('Warning: no media servers selected.')
 
@@ -87,41 +89,15 @@ if len(services) == 0:
 print('\n===CONFIGURATION===')
 print('Please enter your timezone (like "Europe/Amsterdam")', end=' ')
 timezone = input()
+if len(timezone) == 0:
+    timezone = 'Europe/Amsterdam'
+plex_claim = ''
+if services.__contains__('plex'):
+    print('If you have a PleX claim token, enter it now. Otherwise, just press enter.', end=' ')
+    plex_claim = input()
 
-root_dir = None
-config_dir = None
-plex_claim = None
-
-
-
-
-
-
-
-print('Would you like to place all configuration and media directories in a single root directory? [Y/n]', end=' ')
-ans = take_boolean_input()
-if ans:
-    print('Please enter your root directory like "/mediacenter":', end=' ')
-    root_dir = take_directory_input()
-    # DONE. CREATE DIRS AND PERMISSIONS
-else:
-    print('Please enter the directory you\'d like to use for configuration files, like /configuration:', end=' ')
-    config_dir = take_directory_input()
-    print('Would you like to manually enter directories for all different media types? [y/N]', end=' ')
-    ans = take_boolean_input(False)
-    if ans:
-        # Pain
-        pass
-    else:
-        print('Please enter the directory you\'d like to use as the root of your content directories like "/media":' ,end=' ')
-        content_root = take_directory_input()
-
-
-
-
-
-
-
+print('Where would you like to keep your files?', end=' ')
+root_dir = take_directory_input()
 
 compose = open('docker-compose.yml', 'w')
 compose.write(
@@ -129,10 +105,18 @@ compose.write(
     'version: "3.1"\n'
     'services:\n'
 )
-# for service in services:
-#     container_config = ContainerConfig(config_dir, plex_claim, timezone, root_dir)
-#     compose.write(getattr(container_config, service)())
+
+container_config = ContainerConfig(root_dir, timezone, plex_claim=plex_claim)
+permission_setup = UserGroupSetup(root_dir=root_dir)
+
+for service in services:
+    try:
+        getattr(permission_setup, service)()
+    except AttributeError:
+        pass
+    compose.write(getattr(container_config, service)())
 compose.close()
+
 print('Process complete. You can now run "docker compose up -d" to start your containers.')
 print('Thank you for using EZarr. If you experience any issues or have feature requests, add them to our issues.')
 exit(0)
