@@ -140,7 +140,7 @@ services:
     image: lscr.io/linuxserver/jackett:latest
     container_name: jackett
     environment:
-      - PUID=13006
+      - PUID=13008
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
