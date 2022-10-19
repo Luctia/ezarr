@@ -68,3 +68,8 @@ possible to interact with this database after creation, I'd rather not touch the
 that difficult to set them yourself, and quite difficult to do it automatically. For other
 containers, configuration files are automatically generated, so these are more easily edited,
 but I currently don't believe this is worth the effort.
+
+On top of the above, connecting the containers above would mean setting a password and creating an
+API key for all of them. This would lead to everyone using Ezarr having the same API key and user/
+password combination. Personally, I'd rather trust users to figure this out on their own rather
+than trusting them to change these passwords and keys.
