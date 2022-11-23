@@ -50,6 +50,8 @@ print('Use Readarr? [Y/n]', end=" ")
 take_input('readarr', 'servarr')
 print('Use Mylar3? [Y/n]', end=" ")
 take_input('mylar3', 'servarr')
+print('Use Audiobookshelf? [Y/n]', end=" ")
+take_input('audiobookshelf', 'servarr')
 if len(services_classed['servarr']) == 0:
     print('Warning: no media management services selected.')
 

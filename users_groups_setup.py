@@ -52,6 +52,14 @@ class UserGroupSetup:
         self.create_config_dir('mylar')
         os.system('sudo usermod -a -G mediacenter mylar')
 
+    def audiobookshelf(self):
+        os.system(
+            'sudo useradd audiobookshelf -u 13009'
+            ' && sudo mkdir -pv ' + self.root_dir + 'data/{media,torrents}/audiobooks -m 775'
+        )
+        self.create_config_dir('audiobookshelf')
+        os.system('sudo usermod -a -G mediacenter audiobookshelf')
+
     def prowlarr(self):
         os.system('sudo useradd prowlarr -u 13006')
         self.create_config_dir('prowlarr')

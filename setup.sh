@@ -20,8 +20,8 @@ sudo usermod -a -G mediacenter qbittorrent
 sudo usermod -a -G mediacenter jackett
 
 # Make directories
-sudo mkdir -pv docker/{sonarr,radarr,lidarr,readarr,mylar,prowlarr,qbittorrent,jackett}-config
-sudo mkdir -pv data/{torrents,media}/{tv,movies,music,books,comics}
+sudo mkdir -pv docker/{sonarr,radarr,lidarr,readarr,mylar,prowlarr,qbittorrent,jackett,audiobookshelf}-config
+sudo mkdir -pv data/{torrents,media}/{tv,movies,music,books,comics,audiobooks,podcasts,audiobookshelf-metadata}
 
 # Set permissions
 sudo chmod -R 775 data/

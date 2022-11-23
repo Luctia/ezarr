@@ -15,6 +15,7 @@ crash*. It doesn't necessarily mean it will run well on your system ;) It featur
   tricky to set up, so do so at your own risk. In order to connect this to your Prowlarr container,
   the process within Prowlarr is the same as for the other containers (add app). You'll have to add
   an API key within Mylar3, yourself.
+- [Audiobookshelf](https://www.audiobookshelf.org/) is a self-hosted audiobook and podcast server.
 - [Prowlarr](https://wiki.servarr.com/prowlarr) can keep track of indexers, which are services that
   keep track of Torrent or UseNet links. One can search an indexer for certain content and find a
   where to download this. **Note**: when adding an indexer, please do not set the "seed ratio" to

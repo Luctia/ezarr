@@ -157,6 +157,24 @@ class ContainerConfig:
             '    restart: unless-stopped\n\n'
         )
 
+    def audiobookshelf(self):
+        return (
+            '  audiobookshelf:\n'
+            '    image: ghcr.io/advplyr/audiobookshelf:latest\n'
+            '    container_name: audiobookshelf\n'
+            '    environment:\n'
+            '      - AUDIOBOOKSHELF_UID=13009\n'
+            '      - AUDIOBOOKSHELF_GID=13000\n'
+            '    volumes:\n'
+            '      - ' + self.config_dir + '/audiobookshelf:/config\n'
+            '      - ' + self.root_dir + '/data/audiobooks:/audiobooks\n'
+            '      - ' + self.root_dir + '/data/podcasts:/podcasts\n'
+            '      - ' + self.root_dir + '/data/metadata:/metadata\n'
+            '    ports:\n'
+            '      - "13378:80"\n'
+            '    restart: unless-stopped\n\n'
+        )
+
     def prowlarr(self):
         return (
             '  prowlarr:\n'

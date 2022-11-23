@@ -75,6 +75,20 @@ services:
       - "8090:8090"
     restart: unless-stopped
 
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: audiobookshelf
+    environment:
+      - AUDIOBOOKSHELF_UID=13009
+      - AUDIOBOOKSHELF_GID=13000
+    ports:
+      - "13378:80"
+    volumes:
+      - /home/user/ezarr/data/audiobooks:/audiobooks
+      - /home/user/ezarr/data/podcasts:/podcasts
+      - /home/user/ezarr/config/audiobookshelf:/config
+      - /home/user/ezarr/data/audiobookshelf-metadata:/metadata
+
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop
     container_name: prowlarr
