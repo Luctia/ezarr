@@ -20,6 +20,7 @@ crash*. It doesn't necessarily mean it will run well on your system ;) It featur
   where to download this. **Note**: when adding an indexer, please do not set the "seed ratio" to
   less than 1. Less than 1 means that you upload less than you download. Not only is this
   unfriendly towards your fellow users, but it can also get you banned from certain indexers.
+- [Jackett](https://github.com/Jackett/Jackett) is an alternative to Prowlarr. 
 - [qBittorrent](https://www.qbittorrent.org/) can download torrents and provides a bunch more
   features for management.
 - [PleX](https://www.plex.tv/) is a mediaserver. Using this, you get access to a Netflix-like
@@ -73,3 +74,8 @@ possible to interact with this database after creation, I'd rather not touch the
 that difficult to set them yourself, and quite difficult to do it automatically. For other
 containers, configuration files are automatically generated, so these are more easily edited,
 but I currently don't believe this is worth the effort.
+
+On top of the above, connecting the containers above would mean setting a password and creating an
+API key for all of them. This would lead to everyone using Ezarr having the same API key and user/
+password combination. Personally, I'd rather trust users to figure this out on their own rather
+than trusting them to change these passwords and keys.
