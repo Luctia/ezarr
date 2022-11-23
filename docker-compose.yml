@@ -10,8 +10,8 @@ services:
       - UMASK=002
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/luctia/detering/config/sonarr-config:/config
-      - /home/luctia/detering/data:/data
+      - /home/user/ezarr/config/sonarr-config:/config
+      - /home/user/ezarr/data:/data
     ports:
       - "8989:8989"
     restart: unless-stopped
@@ -25,10 +25,54 @@ services:
       - UMASK=002
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/luctia/detering/config/radarr-config:/config
-      - /home/luctia/detering/data:/data
+      - /home/user/ezarr/config/radarr-config:/config
+      - /home/user/ezarr/data:/data
     ports:
       - "7878:7878"
+    restart: unless-stopped
+
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=13003
+      - PGID=13000
+      - UMASK=002
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /home/user/ezarr/config/lidarr-config:/config
+      - /home/user/ezarr/data:/data
+    ports:
+      - "8686:8686"
+    restart: unless-stopped
+
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    environment:
+      - PUID=13004
+      - PGID=13000
+      - UMASK=002
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /home/user/ezarr/config/readarr-config:/config
+      - /home/user/ezarr/data:/data
+    ports:
+      - "8787:8787"
+    restart: unless-stopped
+
+  mylar3:
+    image: lscr.io/linuxserver/mylar3:latest
+    container_name: mylar3
+    environment:
+      - PUID=13005
+      - PGID=13000
+      - UMASK=002
+    volumes:
+      - /home/user/ezarr/config/mylar-config:/config
+      - /home/user/ezarr/data:/data
+    ports:
+      - "8090:8090"
     restart: unless-stopped
 
   prowlarr:
@@ -40,9 +84,38 @@ services:
       - UMASK=002
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/luctia/detering/config/prowlarr-config:/config
+      - /home/user/ezarr/config/prowlarr-config:/config
     ports:
       - "9696:9696"
+    restart: unless-stopped
+
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=${UID}
+      - PGID=13000
+      - VERSION=docker
+      - PLEX_CLAIM=
+    volumes:
+      - /home/user/ezarr/config/plex-config:/config
+      - /home/user/ezarr/data/media:/media
+    restart: unless-stopped
+
+  tautulli:
+    image: lscr.io/linuxserver/tautulli:latest
+    container_name: tautulli
+    depends_on:
+      - plex
+    environment:
+      - PUID=${UID}
+      - PGID=13000
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /home/user/ezarr/config/tautulli-config:/config
+    ports:
+      - "8181:8181"
     restart: unless-stopped
 
   jellyfin:
@@ -54,8 +127,8 @@ services:
       - UMASK=002
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/luctia/detering/config/jellyfin-config:/config
-      - /home/luctia/detering/data/media:/data
+      - /home/user/ezarr/config/jellyfin-config:/config
+      - /home/user/ezarr/data/media:/data
     ports:
       - "8096:8096"
     restart: unless-stopped
@@ -70,8 +143,8 @@ services:
       - TZ=Europe/Amsterdam
       - WEBUI_PORT=8080
     volumes:
-      - /home/luctia/detering/config/qbittorrent-config:/config
-      - /home/luctia/detering/data/torrents:/data/torrents
+      - /home/user/ezarr/config/qbittorrent-config:/config
+      - /home/user/ezarr/data/torrents:/data/torrents
     ports:
       - "8080:8080"
       - "6881:6881"

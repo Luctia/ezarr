@@ -31,6 +31,12 @@ crash*. It doesn't necessarily mean it will run well on your system ;) It featur
   of preference, and you *could* even use both, although this is probably a waste of resources.
 
 ## Using
+### Using the CLI
+To make things easier, a CLI has been developed. First, clone the repository in a directory of your
+choosing. You can run it by entering `python main.py` and the CLI will guide you through the
+process.
+
+### Manually
 1. To get started, clone the repository in a directory of your choosing. **Note: this will be where
    your installation and media will be as well, so think about this a bit.**
 2. Copy `.env.sample` to a real `.env` by running `$ cp .env.sample .env`.
