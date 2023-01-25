@@ -36,7 +36,7 @@ crash*. It doesn't necessarily mean it will run well on your system ;) It featur
 ### Using the CLI
 To make things easier, a CLI has been developed. First, clone the repository in a directory of your
 choosing. You can run it by entering `python main.py` and the CLI will guide you through the
-process.
+process. Please take a look at [important notes](#important-notes) before you continue.
 
 ### Manually
 1. To get started, clone the repository in a directory of your choosing. **Note: this will be where
@@ -51,8 +51,10 @@ process.
    out by placing `#` in front of the lines. This ensures they are ignored by Docker compose.
 6. Run `docker compose up`.
 
-That's it! Your containers are now up and you can continue to set up the settings in them. Take
-note of the following:
+That's it! Your containers are now up and you can continue to set up the settings in them. Please
+take a look at [important notes](#important-notes) before you continue.
+
+## Important notes
 - When linking one service to another, remember to use the container name instead of `localhost`.
 - Please set the settings of the -arr containers as soon as possible to the following (use
   advanced):
