@@ -6,7 +6,9 @@ labels: ''
 assignees: Luctia
 
 ---
-
+<!-- ATTENTION: Please open a discussion or head to its specific community if your issue is about a
+ specific Servarr element. Please do the same if you have a general question, where you're not sure
+if it qualifies as a bug. -->
 **Describe the bug**
 A clear and concise description of what the bug is.
 
