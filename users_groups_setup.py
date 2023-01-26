@@ -18,7 +18,8 @@ class UserGroupSetup:
             '/bin/bash -c "sudo useradd sonarr -u 13001'
             ' ; sudo mkdir -pv ' + self.root_dir + '/data/{media,torrents}/tv -m 775'
             ' ; sudo chown -R sonarr:mediacenter ' + self.root_dir + '/data/{media,torrents}/tv'
-            ' ; sudo chown $(id -u):mediacenter {self.root_dir}/docker"'
+            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data'
+            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data/{media,torrents}"'
         )
         self.create_config_dir('sonarr')
         os.system('sudo usermod -a -G mediacenter sonarr')
@@ -28,7 +29,8 @@ class UserGroupSetup:
             '/bin/bash -c "sudo useradd radarr -u 13002'
             ' ; sudo mkdir -pv ' + self.root_dir + '/data/{media,torrents}/movies -m 775'
             ' ; sudo chown -R radarr:mediacenter ' + self.root_dir + '/data/{media,torrents}/movies'
-            ' ; sudo chown $(id -u):mediacenter {self.root_dir}/docker"'
+            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data'
+            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data/{media,torrents}"'
         )
         self.create_config_dir('radarr')
         os.system('sudo usermod -a -G mediacenter radarr')
@@ -38,7 +40,8 @@ class UserGroupSetup:
             '/bin/bash -c "sudo useradd lidarr -u 13003'
             ' ; sudo mkdir -pv ' + self.root_dir + '/data/{media,torrents}/music -m 775'
             ' ; sudo chown -R lidarr:mediacenter ' + self.root_dir + '/data/{media,torrents}/music'
-            ' ; sudo chown $(id -u):mediacenter {self.root_dir}/docker"'
+            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data'
+            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data/{media,torrents}"'
         )
         self.create_config_dir('lidarr')
         os.system('sudo usermod -a -G mediacenter lidarr')
@@ -48,7 +51,8 @@ class UserGroupSetup:
             '/bin/bash -c "sudo useradd readarr -u 13004'
             ' ; sudo mkdir -pv ' + self.root_dir + '/data/{media,torrents}/books -m 775'
             ' ; sudo chown -R readarr:mediacenter ' + self.root_dir + '/data/{media,torrents}/books'
-            ' ; sudo chown $(id -u):mediacenter {self.root_dir}/docker"'
+            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data'
+            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data/{media,torrents}"'
         )
         self.create_config_dir('readarr')
         os.system('sudo usermod -a -G mediacenter readarr')
@@ -58,7 +62,8 @@ class UserGroupSetup:
             '/bin/bash -c "sudo useradd mylar -u 13005'
             ' ; sudo mkdir -pv ' + self.root_dir + '/data/{media,torrents}/comics -m 775'
             ' ; sudo chown -R mylar:mediacenter ' + self.root_dir + '/data/{media,torrents}/comics'
-            ' ; sudo chown $(id -u):mediacenter {self.root_dir}/docker"'
+            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data'
+            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data/{media,torrents}"'
         )
         self.create_config_dir('mylar')
         os.system('sudo usermod -a -G mediacenter mylar')
@@ -68,7 +73,8 @@ class UserGroupSetup:
             '/bin/bash -c "sudo useradd audiobookshelf -u 13009'
             ' ; sudo mkdir -pv ' + self.root_dir + '/data/{media,torrents}/audiobooks -m 775'
             ' ; sudo chown -R audiobookshelf:mediacenter ' + self.root_dir + '/data/{media,torrents}/audiobooks'
-            ' ; sudo chown $(id -u):mediacenter {self.root_dir}/docker"'
+            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data'
+            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data/{media,torrents}"'
         )
         self.create_config_dir('audiobookshelf')
         os.system('sudo usermod -a -G mediacenter audiobookshelf')
