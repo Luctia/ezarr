@@ -61,6 +61,7 @@ take a look at [important notes](#important-notes) before you continue.
   - Media management:
     - Use hardlinks instead of Copy: `true`
     - Root folder: `/data/media/` and then tv, movies or music depending on service
+  - Make sure to set a username and password for all servarr services and qBittorrent!
 - In qBittorrent, after connecting it to the -arr services, you can indicate it should move
   torrents in certain categories to certain directories, like torrents in the `radarr` category
   to `/data/torrents/movies`. You should do this. Also set the `Default Save Path` to
