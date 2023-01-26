@@ -10,8 +10,8 @@ services:
       - UMASK=002
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/user/ezarr/config/sonarr-config:/config
-      - /home/user/ezarr/data:/data
+      - /home/luctia/ezarr/config/sonarr-config:/config
+      - /home/luctia/ezarr/data:/data
     ports:
       - "8989:8989"
     restart: unless-stopped
@@ -25,8 +25,8 @@ services:
       - UMASK=002
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/user/ezarr/config/radarr-config:/config
-      - /home/user/ezarr/data:/data
+      - /home/luctia/ezarr/config/radarr-config:/config
+      - /home/luctia/ezarr/data:/data
     ports:
       - "7878:7878"
     restart: unless-stopped
@@ -40,8 +40,8 @@ services:
       - UMASK=002
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/user/ezarr/config/lidarr-config:/config
-      - /home/user/ezarr/data:/data
+      - /home/luctia/ezarr/config/lidarr-config:/config
+      - /home/luctia/ezarr/data:/data
     ports:
       - "8686:8686"
     restart: unless-stopped
@@ -55,8 +55,8 @@ services:
       - UMASK=002
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/user/ezarr/config/readarr-config:/config
-      - /home/user/ezarr/data:/data
+      - /home/luctia/ezarr/config/readarr-config:/config
+      - /home/luctia/ezarr/data:/data
     ports:
       - "8787:8787"
     restart: unless-stopped
@@ -69,8 +69,8 @@ services:
       - PGID=13000
       - UMASK=002
     volumes:
-      - /home/user/ezarr/config/mylar-config:/config
-      - /home/user/ezarr/data:/data
+      - /home/luctia/ezarr/config/mylar-config:/config
+      - /home/luctia/ezarr/data:/data
     ports:
       - "8090:8090"
     restart: unless-stopped
@@ -81,13 +81,14 @@ services:
     environment:
       - AUDIOBOOKSHELF_UID=13009
       - AUDIOBOOKSHELF_GID=13000
+    volumes:
+      - /home/luctia/ezarr/config/audiobookshelf:/config
+      - /home/luctia/ezarr/data/audiobooks:/audiobooks
+      - /home/luctia/ezarr/data/podcasts:/podcasts
+      - /home/luctia/ezarr/data/metadata:/metadata
     ports:
       - "13378:80"
-    volumes:
-      - /home/user/ezarr/data/audiobooks:/audiobooks
-      - /home/user/ezarr/data/podcasts:/podcasts
-      - /home/user/ezarr/config/audiobookshelf:/config
-      - /home/user/ezarr/data/audiobookshelf-metadata:/metadata
+    restart: unless-stopped
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop
@@ -98,7 +99,7 @@ services:
       - UMASK=002
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/user/ezarr/config/prowlarr-config:/config
+      - /home/luctia/ezarr/config/prowlarr-config:/config
     ports:
       - "9696:9696"
     restart: unless-stopped
@@ -113,8 +114,8 @@ services:
       - VERSION=docker
       - PLEX_CLAIM=
     volumes:
-      - /home/user/ezarr/config/plex-config:/config
-      - /home/user/ezarr/data/media:/media
+      - /home/luctia/ezarr/config/plex-config:/config
+      - /home/luctia/ezarr/data/media:/media
     restart: unless-stopped
 
   tautulli:
@@ -127,7 +128,7 @@ services:
       - PGID=13000
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/user/ezarr/config/tautulli-config:/config
+      - /home/luctia/ezarr/config/tautulli-config:/config
     ports:
       - "8181:8181"
     restart: unless-stopped
@@ -141,24 +142,10 @@ services:
       - UMASK=002
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/user/ezarr/config/jellyfin-config:/config
-      - /home/user/ezarr/data/media:/data
+      - /home/luctia/ezarr/config/jellyfin-config:/config
+      - /home/luctia/ezarr/data/media:/data
     ports:
       - "8096:8096"
-    restart: unless-stopped
-
-  jackett:
-    image: lscr.io/linuxserver/jackett:latest
-    container_name: jackett
-    environment:
-      - PUID=13008
-      - PGID=13000
-      - UMASK=002
-      - TZ=${TIMEZONE}
-    volumes:
-      - ${ROOT_DIR}/docker/jackett-config:/config
-    ports:
-      - 9117:9117
     restart: unless-stopped
 
   qbittorrent:
@@ -171,8 +158,8 @@ services:
       - TZ=Europe/Amsterdam
       - WEBUI_PORT=8080
     volumes:
-      - /home/user/ezarr/config/qbittorrent-config:/config
-      - /home/user/ezarr/data/torrents:/data/torrents
+      - /home/luctia/ezarr/config/qbittorrent-config:/config
+      - /home/luctia/ezarr/data/torrents:/data/torrents
     ports:
       - "8080:8080"
       - "6881:6881"
