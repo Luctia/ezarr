@@ -44,9 +44,6 @@ print('Use Sonarr? [Y/n]', end=" ")
 take_input('sonarr', 'servarr')
 print('Use Radarr? [Y/n]', end=" ")
 take_input('radarr', 'servarr')
-if services_classed['servarr'].__contains__('sonarr') or services_classed['servarr'].__contains__('radarr'):
-    print('Use Overseerr? [Y/n]', end=" ")
-    take_input('overseerr', 'servarr')
 print('Use Lidarr? [Y/n]', end=" ")
 take_input('lidarr', 'servarr')
 print('Use Readarr? [Y/n]', end=" ")
@@ -72,6 +69,9 @@ take_input('plex', 'ms')
 if services_classed['ms'].__contains__('plex'):
     print('Use Tautulli? [Y/n]', end=" ")
     take_input('tautulli', 'ms')
+    if services_classed['servarr'].__contains__('sonarr') or services_classed['servarr'].__contains__('radarr'):
+        print('Use Overseerr? [Y/n]', end=" ")
+        take_input('overseerr', 'servarr')
 print('Use Jellyfin? [Y/n]', end=" ")
 take_input('jellyfin', 'ms')
 if len(services_classed['ms']) == 0:

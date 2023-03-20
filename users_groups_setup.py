@@ -89,7 +89,7 @@ class UserGroupSetup:
         os.system('sudo usermod -a -G mediacenter qbittorrent')
 
     def overseerr(self):
-        os.system('sudo useradd overseerr -u 13010')
+        os.system('sudo useradd overseerr -u 13009')
         self.create_config_dir('overseerr')
         os.system('sudo usermod -a -G mediacenter overseerr')
 

@@ -9,7 +9,7 @@ sudo useradd mylar -u 13005
 sudo useradd prowlarr -u 13006
 sudo useradd qbittorrent -u 13007
 sudo useradd jackett -u 13008
-sudo useradd overseerr -u 13010
+sudo useradd overseerr -u 13009
 sudo groupadd mediacenter -g 13000
 sudo usermod -a -G mediacenter sonarr
 sudo usermod -a -G mediacenter radarr
@@ -36,6 +36,6 @@ sudo chown -R mylar:mediacenter docker/mylar-config
 sudo chown -R prowlarr:mediacenter docker/prowlarr-config
 sudo chown -R qbittorrent:mediacenter docker/qbittorrent-config
 sudo chown -R jackett:mediacenter docker/jackett-config
-sudo chown -R jackett:mediacenter docker/overseerr-config
+sudo chown -R overseerr:mediacenter docker/overseerr-config
 
 echo "UID=$(id -u)" >> .env

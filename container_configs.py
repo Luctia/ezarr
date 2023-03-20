@@ -219,7 +219,7 @@ class ContainerConfig:
             '    image: sctx/overseerr:latest\n'
             '    container_name: overseerr\n'
             '    environment:\n'
-            '      - PUID=13010\n'
+            '      - PUID=13009\n'
             '      - PGID=13000\n'
             '      - UMASK=002\n'
             '      - TZ=' + self.timezone + '\n'
