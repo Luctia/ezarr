@@ -212,3 +212,20 @@ class ContainerConfig:
             '      - "6881:6881/udp"\n'
             '    restart: unless-stopped\n\n'
         )
+
+    def overseerr(self):
+        return (
+            '  overseerr:\n'
+            '    image: sctx/overseerr:latest\n'
+            '    container_name: overseerr\n'
+            '    environment:\n'
+            '      - PUID=13009\n'
+            '      - PGID=13000\n'
+            '      - UMASK=002\n'
+            '      - TZ=' + self.timezone + '\n'
+            '    volumes:\n'
+            '      - ' + self.config_dir + '/overseerr-config:/app/config\n'
+            '    ports:\n'
+            '      - "5055:5055"\n'
+            '    restart: unless-stopped\n\n'
+        )

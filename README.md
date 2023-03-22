@@ -31,6 +31,8 @@ crash*. It doesn't necessarily mean it will run well on your system ;) It featur
   what has been watched, who watched it, when and where they watched it, and how it was watched.
 - [Jellyfin](https://jellyfin.org/) is an alternative for PleX. Which you'd like to use is a matter
   of preference, and you *could* even use both, although this is probably a waste of resources.
+- [Overseerr](https://overseerr.dev/) is a show and movie request management and media discovery
+   tool.
 
 ## Using
 ### Using the CLI
