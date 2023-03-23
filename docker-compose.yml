@@ -166,3 +166,17 @@ services:
       - "6881:6881/udp"
     restart: unless-stopped
 
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    environment:
+      - PUID=13011
+      - PGID=13000
+      - UMASK=002
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /home/user/ezarr/config/sabnzbd-config:/config
+      - /home/user/ezarr/data/usenet:/data/usenet
+    ports:
+      - "8081:8080"
+    restart: unless-stopped

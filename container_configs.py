@@ -14,6 +14,7 @@ class ContainerConfig:
         self.book_dir = root_dir + '/media/books'
         self.comic_dir = root_dir + '/media/comics'
         self.torrent_dir = root_dir + '/data/torrents'
+        self.usenet_dir = root_dir + '/data/usenet'
 
     def plex(self):
         return (
@@ -227,5 +228,23 @@ class ContainerConfig:
             '      - ' + self.config_dir + '/overseerr-config:/app/config\n'
             '    ports:\n'
             '      - "5055:5055"\n'
+            '    restart: unless-stopped\n\n'
+        )
+
+    def sabnzbd(self):
+        return (
+            '  sabnzbd:\n'
+            '    image: lscr.io/linuxserver/sabnzbd:latest\n'
+            '    container_name: sabnzbd\n'
+            '    environment:\n'
+            '      - PUID=13011\n'
+            '      - PGID=13000\n'
+            '      - UMASK=002\n'
+            '      - TZ=' + self.timezone + '\n'
+            '    volumes:\n'
+            '      - ' + self.config_dir + '/sabnzbd-config:/app/config\n'
+            '      - ' + self.usenet_dir + ':/data/usenet\n'
+            '    ports:\n'
+            '      - "8081:8080"\n'
             '    restart: unless-stopped\n\n'
         )
