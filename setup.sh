@@ -10,6 +10,7 @@ sudo useradd prowlarr -u 13006
 sudo useradd qbittorrent -u 13007
 sudo useradd jackett -u 13008
 sudo useradd overseerr -u 13009
+sudo useradd plex -u 13010
 sudo groupadd mediacenter -g 13000
 sudo usermod -a -G mediacenter sonarr
 sudo usermod -a -G mediacenter radarr
@@ -20,9 +21,10 @@ sudo usermod -a -G mediacenter prowlarr
 sudo usermod -a -G mediacenter qbittorrent
 sudo usermod -a -G mediacenter jackett
 sudo usermod -a -G mediacenter overseerr
+sudo usermod -a -G mediacenter plex
 
 # Make directories
-sudo mkdir -pv docker/{sonarr,radarr,lidarr,readarr,mylar,prowlarr,qbittorrent,jackett,audiobookshelf,overseerr}-config
+sudo mkdir -pv docker/{sonarr,radarr,lidarr,readarr,mylar,prowlarr,qbittorrent,jackett,audiobookshelf,overseerr,plex,tautulli}-config
 sudo mkdir -pv data/{torrents,media}/{tv,movies,music,books,comics,audiobooks,podcasts,audiobookshelf-metadata}
 
 # Set permissions
@@ -37,5 +39,6 @@ sudo chown -R prowlarr:mediacenter docker/prowlarr-config
 sudo chown -R qbittorrent:mediacenter docker/qbittorrent-config
 sudo chown -R jackett:mediacenter docker/jackett-config
 sudo chown -R overseerr:mediacenter docker/overseerr-config
+sudo chown -R plex:mediacenter docker/plex-config
 
 echo "UID=$(id -u)" >> .env

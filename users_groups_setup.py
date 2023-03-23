@@ -93,3 +93,8 @@ class UserGroupSetup:
         self.create_config_dir('overseerr')
         os.system('sudo usermod -a -G mediacenter overseerr')
 
+    def plex(self):
+        os.system('sudo useradd plex -u 13010')
+        self.create_config_dir('plex')
+        os.system('sudo usermod -a -G mediacenter plex')
+
