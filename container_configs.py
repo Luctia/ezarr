@@ -22,7 +22,7 @@ class ContainerConfig:
             '    container_name: plex\n'
             '    network_mode: host\n'
             '    environment:\n'
-            '      - PUID=13010n'
+            '      - PUID=13010\n'
             '      - PGID=13000\n'
             '      - VERSION=docker\n'
             '      - PLEX_CLAIM=' + self.plex_claim + '\n'
