@@ -242,7 +242,7 @@ class ContainerConfig:
             '      - UMASK=002\n'
             '      - TZ=' + self.timezone + '\n'
             '    volumes:\n'
-            '      - ' + self.config_dir + '/sabnzbd-config:/app/config\n'
+            '      - ' + self.config_dir + '/sabnzbd-config:/config\n'
             '      - ' + self.usenet_dir + ':/data/usenet\n'
             '    ports:\n'
             '      - "8081:8080"\n'
