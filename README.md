@@ -24,6 +24,8 @@ crash*. It doesn't necessarily mean it will run well on your system ;) It featur
 - [Jackett](https://github.com/Jackett/Jackett) is an alternative to Prowlarr. 
 - [qBittorrent](https://www.qbittorrent.org/) can download torrents and provides a bunch more
   features for management.
+- [SABnzbd](https://sabnzbd.org/) can download nzb's
+  features for management.
 - [PleX](https://www.plex.tv/) is a mediaserver. Using this, you get access to a Netflix-like
   interface across many devices like your laptop or computer, your phone, your TV and more. For
   some features, you need a [PleX pass](https://www.plex.tv/nl/plex-pass/).
@@ -71,6 +73,12 @@ take a look at [important notes](#important-notes) before you continue.
   field: `chmod -R 775 "%F/"`.
 - You'll have to add indexers in Prowlarr by hand. Use Prowlarrs settings to connect it to the
   other -arr apps.
+  
+### SABnzbd External internet access denied message
+When you're trying to access SABnzbd the first time you'll come across the message "External internet access denied".
+To fix this simple modify the `sabnzbd.ini` and change `inet_exposure` to `4`, restart the docker container for sabnzbd (`docker restart sabnzbd`) and now you can access the UI of SABnzbd. After accessing the UI don't forget to set a username and password (https://sabnzbd.org/wiki/configuration/3.7/general , section Security).
+
+For more instructions or help see also https://sabnzbd.org/wiki/extra/access-denied.html on the official SABnzbd website.
 
 ## FAQ
 
