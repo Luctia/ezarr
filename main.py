@@ -81,8 +81,14 @@ print('\n===BITTORRENT===')
 services_classed['torrent'] = []
 print('Use qBittorrent? [Y/n]', end=" ")
 take_input('qbittorrent', 'torrent')
-if len(services_classed['torrent']) == 0:
-    print('Warning: no BitTorrent clients selected.')
+
+print('\n===USENET===')
+services_classed['usenet'] = []
+print('Use SABnzbd? [Y/n]', end=" ")
+take_input('sabnzbd', 'usenet')
+
+if len(services_classed['torrent']) == 0 and len(services_classed['usenet']) == 0:
+    print('Warning: no usenet or BitTorrent clients selected.')
 
 services = []
 for service_class in services_classed.keys():
