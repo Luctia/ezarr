@@ -35,6 +35,7 @@ crash*. It doesn't necessarily mean it will run well on your system ;) It featur
   of preference, and you *could* even use both, although this is probably a waste of resources.
 - [Overseerr](https://overseerr.dev/) is a show and movie request management and media discovery
    tool.
+- [Jellyseerr](https://github.com/Fallenbagel/jellyseerr) is like Overseerr, but for Jellyfin.
 
 ## Using
 ### Using the CLI
