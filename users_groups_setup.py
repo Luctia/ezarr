@@ -102,3 +102,8 @@ class UserGroupSetup:
         os.system('sudo useradd sabnzbd -u 13011')
         self.create_config_dir('sabnzbd')
         os.system('sudo usermod -a -G mediacenter sabnzbd')
+
+    def jellyseerr(self):
+        os.system('sudo useradd jellyseerr -u 13012')
+        self.create_config_dir('jellyseerr')
+        os.system('sudo usermod -a -G mediacenter jellyseerr')

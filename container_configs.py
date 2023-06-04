@@ -230,6 +230,23 @@ class ContainerConfig:
             '      - "5055:5055"\n'
             '    restart: unless-stopped\n\n'
         )
+    
+    def jellyseerr(self):
+        return (
+            '  jellyseerr:\n'
+            '    image: fallenbagel/jellyseerr:latest\n'
+            '    container_name: jellyseerr\n'
+            '    environment:\n'
+            '      - PUID=13012\n'
+            '      - PGID=13000\n'
+            '      - UMASK=002\n'
+            '      - TZ=' + self.timezone + '\n'
+            '    volumes:\n'
+            '      - ' + self.config_dir + '/jellyseerr-config:/app/config\n'
+            '    ports:\n'
+            '      - "5056:5055"\n'
+            '    restart: unless-stopped\n\n'
+        )
 
     def sabnzbd(self):
         return (
