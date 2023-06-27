@@ -12,6 +12,7 @@ sudo useradd jackett -u 13008
 sudo useradd overseerr -u 13009
 sudo useradd plex -u 13010
 sudo useradd sabnzbd -u 13011
+sudo useradd jellyseerr -u 13012
 sudo groupadd mediacenter -g 13000
 sudo usermod -a -G mediacenter sonarr
 sudo usermod -a -G mediacenter radarr
@@ -24,9 +25,10 @@ sudo usermod -a -G mediacenter jackett
 sudo usermod -a -G mediacenter overseerr
 sudo usermod -a -G mediacenter plex
 sudo usermod -a -G mediacenter sabnzbd
+sudo usermod -a -G mediacenter jellyseerr
 
 # Make directories
-sudo mkdir -pv docker/{sonarr,radarr,lidarr,readarr,mylar,prowlarr,qbittorrent,jackett,audiobookshelf,overseerr,plex,tautulli,sabnzbd}-config
+sudo mkdir -pv docker/{sonarr,radarr,lidarr,readarr,mylar,prowlarr,qbittorrent,jackett,audiobookshelf,overseerr,plex,tautulli,sabnzbd,jellyseerr}-config
 sudo mkdir -pv data/{torrents,usenet,media}/{tv,movies,music,books,comics,audiobooks,podcasts,audiobookshelf-metadata}
 
 # Set permissions
@@ -43,5 +45,6 @@ sudo chown -R jackett:mediacenter docker/jackett-config
 sudo chown -R overseerr:mediacenter docker/overseerr-config
 sudo chown -R plex:mediacenter docker/plex-config
 sudo chown -R sabnzbd:mediacenter docker/sabnzbd-config
+sudo chown -R jellyseerr:mediacenter docker/jellyseerr-config
 
 echo "UID=$(id -u)" >> .env
