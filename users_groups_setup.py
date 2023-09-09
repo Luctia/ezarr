@@ -8,9 +8,9 @@ class UserGroupSetup:
 
     def create_config_dir(self, service_name):
         os.system(
-            f'sudo mkdir -p {self.root_dir}/docker/{service_name}-config'
-            f' ; sudo chown -R {service_name}:mediacenter {self.root_dir}/docker/{service_name}-config'
-            f' ; sudo chown $(id -u):mediacenter {self.root_dir}/docker'
+            f'sudo mkdir -p {self.root_dir}/config/{service_name}-config'
+            f' ; sudo chown -R {service_name}:mediacenter {self.root_dir}/config/{service_name}-config'
+            f' ; sudo chown $(id -u):mediacenter {self.root_dir}/config'
         )
 
     def sonarr(self):
