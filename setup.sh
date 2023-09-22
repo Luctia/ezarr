@@ -28,23 +28,23 @@ sudo usermod -a -G mediacenter sabnzbd
 sudo usermod -a -G mediacenter jellyseerr
 
 # Make directories
-sudo mkdir -pv docker/{sonarr,radarr,lidarr,readarr,mylar,prowlarr,qbittorrent,jackett,audiobookshelf,overseerr,plex,tautulli,sabnzbd,jellyseerr}-config
+sudo mkdir -pv config/{sonarr,radarr,lidarr,readarr,mylar,prowlarr,qbittorrent,jackett,audiobookshelf,overseerr,plex,tautulli,sabnzbd,jellyseerr}-config
 sudo mkdir -pv data/{torrents,usenet,media}/{tv,movies,music,books,comics,audiobooks,podcasts,audiobookshelf-metadata}
 
 # Set permissions
 sudo chmod -R 775 data/
 sudo chown -R $(id -u):mediacenter data/
-sudo chown -R sonarr:mediacenter docker/sonarr-config
-sudo chown -R radarr:mediacenter docker/radarr-config
-sudo chown -R lidarr:mediacenter docker/lidarr-config
-sudo chown -R readarr:mediacenter docker/readarr-config
-sudo chown -R mylar:mediacenter docker/mylar-config
-sudo chown -R prowlarr:mediacenter docker/prowlarr-config
-sudo chown -R qbittorrent:mediacenter docker/qbittorrent-config
-sudo chown -R jackett:mediacenter docker/jackett-config
-sudo chown -R overseerr:mediacenter docker/overseerr-config
-sudo chown -R plex:mediacenter docker/plex-config
-sudo chown -R sabnzbd:mediacenter docker/sabnzbd-config
-sudo chown -R jellyseerr:mediacenter docker/jellyseerr-config
+sudo chown -R sonarr:mediacenter config/sonarr-config
+sudo chown -R radarr:mediacenter config/radarr-config
+sudo chown -R lidarr:mediacenter config/lidarr-config
+sudo chown -R readarr:mediacenter config/readarr-config
+sudo chown -R mylar:mediacenter config/mylar-config
+sudo chown -R prowlarr:mediacenter config/prowlarr-config
+sudo chown -R qbittorrent:mediacenter config/qbittorrent-config
+sudo chown -R jackett:mediacenter config/jackett-config
+sudo chown -R overseerr:mediacenter config/overseerr-config
+sudo chown -R plex:mediacenter config/plex-config
+sudo chown -R sabnzbd:mediacenter config/sabnzbd-config
+sudo chown -R jellyseerr:mediacenter config/jellyseerr-config
 
 echo "UID=$(id -u)" >> .env

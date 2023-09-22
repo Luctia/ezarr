@@ -89,6 +89,13 @@ official SABnzbd website.
 
 ## FAQ
 
+### How to update containers
+If you'd like to update containers, you can move to the directory of your `docker-compose.yml` file
+and run `(sudo) docker compose pull`. This pulls the newest versions of all images (blueprints for
+containers) listed in the `docker-compose.yml` file. Then, you can run `(sudo) docker compose up
+-d`. This will deploy the new versions without losing uptime. Afterwards, you can run `(sudo)
+docker image prune` to remove the old images, freeing up space.
+
 ### Why do I need to set some settings myself, can that be added?
 Some settings, particularly for the Servarr suite, are set in databases. While it *might* be
 possible to interact with this database after creation, I'd rather not touch these. It's not
