@@ -8,10 +8,10 @@ services:
       - PUID=13001
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=America/New_York
     volumes:
-      - /home/user/ezarr/config/sonarr-config:/config
-      - /home/user/ezarr/data:/data
+      - /synology-nas/media/config/sonarr-config:/config
+      - /synology-nas/media/data:/data
     ports:
       - "8989:8989"
     restart: unless-stopped
@@ -23,10 +23,10 @@ services:
       - PUID=13002
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=America/New_York
     volumes:
-      - /home/user/ezarr/config/radarr-config:/config
-      - /home/user/ezarr/data:/data
+      - /synology-nas/media/config/radarr-config:/config
+      - /synology-nas/media/data:/data
     ports:
       - "7878:7878"
     restart: unless-stopped
@@ -38,10 +38,10 @@ services:
       - PUID=13003
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=America/New_York
     volumes:
-      - /home/user/ezarr/config/lidarr-config:/config
-      - /home/user/ezarr/data:/data
+      - /synology-nas/media/config/lidarr-config:/config
+      - /synology-nas/media/data:/data
     ports:
       - "8686:8686"
     restart: unless-stopped
@@ -53,41 +53,26 @@ services:
       - PUID=13004
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=America/New_York
     volumes:
-      - /home/user/ezarr/config/readarr-config:/config
-      - /home/user/ezarr/data:/data
+      - /synology-nas/media/config/readarr-config:/config
+      - /synology-nas/media/data:/data
     ports:
       - "8787:8787"
     restart: unless-stopped
 
-  mylar3:
-    image: lscr.io/linuxserver/mylar3:latest
-    container_name: mylar3
+  overseerr:
+    image: sctx/overseerr:latest
+    container_name: overseerr
     environment:
-      - PUID=13005
+      - PUID=13009
       - PGID=13000
       - UMASK=002
+      - TZ=America/New_York
     volumes:
-      - /home/user/ezarr/config/mylar-config:/config
-      - /home/user/ezarr/data:/data
+      - /synology-nas/media/config/overseerr-config:/app/config
     ports:
-      - "8090:8090"
-    restart: unless-stopped
-
-  audiobookshelf:
-    image: ghcr.io/advplyr/audiobookshelf:latest
-    container_name: audiobookshelf
-    environment:
-      - AUDIOBOOKSHELF_UID=13009
-      - AUDIOBOOKSHELF_GID=13000
-    volumes:
-      - /home/user/ezarr/config/audiobookshelf:/config
-      - /home/user/ezarr/data/audiobooks:/audiobooks
-      - /home/user/ezarr/data/podcasts:/podcasts
-      - /home/user/ezarr/data/metadata:/metadata
-    ports:
-      - "13378:80"
+      - "5055:5055"
     restart: unless-stopped
 
   prowlarr:
@@ -97,9 +82,9 @@ services:
       - PUID=13006
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=America/New_York
     volumes:
-      - /home/user/ezarr/config/prowlarr-config:/config
+      - /synology-nas/media/config/prowlarr-config:/config
     ports:
       - "9696:9696"
     restart: unless-stopped
@@ -114,8 +99,8 @@ services:
       - VERSION=docker
       - PLEX_CLAIM=
     volumes:
-      - /home/user/ezarr/config/plex-config:/config
-      - /home/user/ezarr/data/media:/media
+      - /synology-nas/media/config/plex-config:/config
+      - /synology-nas/media/data/media:/media
     restart: unless-stopped
 
   tautulli:
@@ -126,26 +111,11 @@ services:
     environment:
       - PUID=${UID}
       - PGID=13000
-      - TZ=Europe/Amsterdam
+      - TZ=America/New_York
     volumes:
-      - /home/user/ezarr/config/tautulli-config:/config
+      - /synology-nas/media/config/tautulli-config:/config
     ports:
       - "8181:8181"
-    restart: unless-stopped
-
-  jellyfin:
-    image: lscr.io/linuxserver/jellyfin:latest
-    container_name: jellyfin
-    environment:
-      - PUID=${UID}
-      - PGID=13000
-      - UMASK=002
-      - TZ=Europe/Amsterdam
-    volumes:
-      - /home/user/ezarr/config/jellyfin-config:/config
-      - /home/user/ezarr/data/media:/data
-    ports:
-      - "8096:8096"
     restart: unless-stopped
 
   qbittorrent:
@@ -155,28 +125,14 @@ services:
       - PUID=13007
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=America/New_York
       - WEBUI_PORT=8080
     volumes:
-      - /home/user/ezarr/config/qbittorrent-config:/config
-      - /home/user/ezarr/data/torrents:/data/torrents
+      - /synology-nas/media/config/qbittorrent-config:/config
+      - /synology-nas/media/data/torrents:/data/torrents
     ports:
       - "8080:8080"
       - "6881:6881"
       - "6881:6881/udp"
     restart: unless-stopped
 
-  sabnzbd:
-    image: lscr.io/linuxserver/sabnzbd:latest
-    container_name: sabnzbd
-    environment:
-      - PUID=13011
-      - PGID=13000
-      - UMASK=002
-      - TZ=Europe/Amsterdam
-    volumes:
-      - /home/user/ezarr/config/sabnzbd-config:/config
-      - /home/user/ezarr/data/usenet:/data/usenet
-    ports:
-      - "8081:8080"
-    restart: unless-stopped

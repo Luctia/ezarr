@@ -1,0 +1,34 @@
+# This is an example config to demonstrate how an NFS share may be used if it's not already mounted to the host.
+# This has not been tested.
+
+version: "3.1"
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=13001 
+      - PGID=13000
+      - UMASK=002
+      - TZ=America/New_York
+    volumes:
+      - sonarr-config:/config
+      - nfs-data:/data
+    ports:
+      - "8989:8989"
+    restart: unless-stopped
+
+volumes:
+  nfs-data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: nfsvers=4,addr=192.168.0.132,rw
+      device: ":/volume1/media/downloads/data"
+  
+  sonarr-config:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: nfsvers=4,addr=192.168.0.132,rw
+      device: ":/volume1/media/downloads/config/sonarr-config"
