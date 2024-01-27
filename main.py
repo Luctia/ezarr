@@ -54,6 +54,9 @@ print('Use Audiobookshelf? [Y/n]', end=" ")
 take_input('audiobookshelf', 'servarr')
 if len(services_classed['servarr']) == 0:
     print('Warning: no media management services selected.')
+if services_classed['servarr'].__contains__('sonarr') or services_classed['servarr'].__contains__('radarr'):
+    print('Use Bazarr? [Y/n]', end=" ")
+    take_input('bazarr', 'servarr')
 
 print('\n===INDEXERS===')
 services_classed['indexer'] = []
@@ -134,4 +137,5 @@ compose.close()
 
 print('Process complete. You can now run "docker compose up -d" to start your containers.')
 print('Thank you for using EZarr. If you experience any issues or have feature requests, add them to our issues.')
+print('For questions, you can also use the discussions tab.')
 exit(0)

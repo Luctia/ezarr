@@ -31,6 +31,20 @@ services:
       - "7878:7878"
     restart: unless-stopped
 
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=13012
+      - PGID=13000
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /home/user/ezarr/config/bazarr-config:/config
+      - /home/user/ezarr/data/media:/media
+    ports:
+      - "6767:6767"
+    restart: unless-stopped
+
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
     container_name: lidarr

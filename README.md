@@ -9,6 +9,8 @@ crash*. It doesn't necessarily mean it will run well on your system ;) It featur
   download this if connected to Prowlarr and qBittorrent. It can also reorganize the media you
   already own in order to create a more uniformly formatted collection.
 - [Radarr](https://radarr.video/) is like Sonarr, but for movies.
+- [Bazarr](https://www.bazarr.media/) is a companion application to Sonarr and Radarr that manages
+  and downloads subtitles based on your requirements.
 - [Lidarr](https://lidarr.audio/) is like Sonarr, but for music.
 - [Readarr](https://readarr.com/) is like Sonarr, but for books.
 - [Mylar3](https://github.com/mylar3/mylar3) is like Sonarr, but for comic books. This one is a bit

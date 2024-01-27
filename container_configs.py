@@ -105,6 +105,23 @@ class ContainerConfig:
             '    restart: unless-stopped\n\n'
         )
 
+    def bazarr(self):
+        return (
+            '  bazarr:\n'
+            '    image: lscr.io/linuxserver/bazarr:latest\n'
+            '    container_name: bazarr\n'
+            '    environment:\n'
+            '      - PUID=13013\n'
+            '      - PGID=13000\n'
+            '      - TZ=' + self.timezone + '\n'
+            '    volumes:\n'
+            '      - ' + self.config_dir + '/bazarr-config:/config\n'
+            '      - ' + self.root_dir + '/data/media:/media\n'
+            '    ports:\n'
+            '      - "6767:6767"\n'
+            '    restart: unless-stopped\n\n'
+        )
+
     def lidarr(self):
         return (
             '  lidarr:\n'
