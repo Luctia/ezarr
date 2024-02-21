@@ -135,7 +135,7 @@ for service in services:
     compose.write(getattr(container_config, service)())
 compose.close()
 
-print('Process complete. You can now run "docker compose up -d" to start your containers.')
+print('Process complete. You can now run "docker-compose up -d" to start your containers.')
 print('Thank you for using EZarr. If you experience any issues or have feature requests, add them to our issues.')
 print('For questions, you can also use the discussions tab.')
 exit(0)
