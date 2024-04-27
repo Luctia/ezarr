@@ -35,11 +35,6 @@ class UserGroupSetup:
         self.create_config_dir('radarr')
         os.system('sudo usermod -a -G mediacenter radarr')
 
-    def bazarr(self):
-        os.system('/bin/bash -c "sudo useradd bazarr -u 13013"')
-        self.create_config_dir('bazarr')
-        os.system('sudo usermod -a -G mediacenter bazarr')
-
     def lidarr(self):
         os.system(
             '/bin/bash -c "sudo useradd lidarr -u 13003'
@@ -75,7 +70,7 @@ class UserGroupSetup:
 
     def audiobookshelf(self):
         os.system(
-            '/bin/bash -c "sudo useradd audiobookshelf -u 13009'
+            '/bin/bash -c "sudo useradd audiobookshelf -u 13006'
             ' ; sudo mkdir -pv ' + self.root_dir + '/data/{media,usenet,torrents}/audiobooks -m 775'
             ' ; sudo chown -R audiobookshelf:mediacenter ' + self.root_dir + '/data/{media,usenet,torrents}/audiobooks'
             ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data'
@@ -84,31 +79,43 @@ class UserGroupSetup:
         self.create_config_dir('audiobookshelf')
         os.system('sudo usermod -a -G mediacenter audiobookshelf')
 
+    def bazarr(self):
+        os.system('/bin/bash -c "sudo useradd bazarr -u 13007"')
+        self.create_config_dir('bazarr')
+        os.system('sudo usermod -a -G mediacenter bazarr')
+
     def prowlarr(self):
-        os.system('sudo useradd prowlarr -u 13006')
+        os.system('sudo useradd prowlarr -u 13008')
         self.create_config_dir('prowlarr')
         os.system('sudo usermod -a -G mediacenter prowlarr')
-
-    def qbittorrent(self):
-        os.system('sudo useradd qbittorrent -u 13007')
-        os.system('sudo usermod -a -G mediacenter qbittorrent')
-
-    def overseerr(self):
-        os.system('sudo useradd overseerr -u 13009')
-        self.create_config_dir('overseerr')
-        os.system('sudo usermod -a -G mediacenter overseerr')
+    
+    def jackett(self):
+        os.system('sudo useradd jackett -u 13009')
+        self.create_config_dir('jackett')
+        os.system('sudo usermod -a -G mediacenter jackett')
 
     def plex(self):
         os.system('sudo useradd plex -u 13010')
         self.create_config_dir('plex')
         os.system('sudo usermod -a -G mediacenter plex')
 
-    def sabnzbd(self):
-        os.system('sudo useradd sabnzbd -u 13011')
-        self.create_config_dir('sabnzbd')
-        os.system('sudo usermod -a -G mediacenter sabnzbd')
-
+    def overseerr(self):
+        os.system('sudo useradd overseerr -u 130011')
+        self.create_config_dir('overseerr')
+        os.system('sudo usermod -a -G mediacenter overseerr')
+    
     def jellyseerr(self):
         os.system('sudo useradd jellyseerr -u 13012')
         self.create_config_dir('jellyseerr')
         os.system('sudo usermod -a -G mediacenter jellyseerr')
+
+    def qbittorrent(self):
+        os.system('sudo useradd qbittorrent -u 13013')
+        os.system('sudo usermod -a -G mediacenter qbittorrent')
+
+    def sabnzbd(self):
+        os.system('sudo useradd sabnzbd -u 13014')
+        self.create_config_dir('sabnzbd')
+        os.system('sudo usermod -a -G mediacenter sabnzbd')
+
+    

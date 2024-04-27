@@ -16,59 +16,6 @@ class ContainerConfig:
         self.torrent_dir = root_dir + '/data/torrents'
         self.usenet_dir = root_dir + '/data/usenet'
 
-    def plex(self):
-        return (
-            '  plex:\n'
-            '    image: lscr.io/linuxserver/plex:latest\n'
-            '    container_name: plex\n'
-            '    network_mode: host\n'
-            '    environment:\n'
-            '      - PUID=13010\n'
-            '      - PGID=13000\n'
-            '      - VERSION=docker\n'
-            '      - PLEX_CLAIM=' + self.plex_claim + '\n'
-            '    volumes:\n'
-            '      - ' + self.config_dir + '/plex-config:/config\n'
-            '      - ' + self.root_dir + '/data/media:/media\n'
-            '    restart: unless-stopped\n\n'
-        )
-
-    def tautulli(self):
-        return (
-            '  tautulli:\n'
-            '    image: lscr.io/linuxserver/tautulli:latest\n'
-            '    container_name: tautulli\n'
-            '    depends_on:\n'
-            '      - plex\n'
-            '    environment:\n'
-            '      - PUID=${UID}\n'
-            '      - PGID=13000\n'
-            '      - TZ=' + self.timezone + '\n'
-            '    volumes:\n'
-            '      - ' + self.config_dir + '/tautulli-config:/config\n'
-            '    ports:\n'
-            '      - "8181:8181"\n'
-            '    restart: unless-stopped\n\n'
-        )
-
-    def jellyfin(self):
-        return (
-            '  jellyfin:\n'
-            '    image: lscr.io/linuxserver/jellyfin:latest\n'
-            '    container_name: jellyfin\n'
-            '    environment:\n'
-            '      - PUID=${UID}\n'
-            '      - PGID=13000\n'
-            '      - UMASK=002\n'
-            '      - TZ=' + self.timezone + '\n'
-            '    volumes:\n'
-            '      - ' + self.config_dir + '/jellyfin-config:/config\n'
-            '      - ' + self.root_dir + '/data/media:/data\n'
-            '    ports:\n'
-            '      - "8096:8096"\n'
-            '    restart: unless-stopped\n\n'
-        )
-
     def sonarr(self):
         return (
             '  sonarr:\n'
@@ -102,23 +49,6 @@ class ContainerConfig:
             '      - ' + self.root_dir + '/data:/data\n'
             '    ports:\n'
             '      - "7878:7878"\n'
-            '    restart: unless-stopped\n\n'
-        )
-
-    def bazarr(self):
-        return (
-            '  bazarr:\n'
-            '    image: lscr.io/linuxserver/bazarr:latest\n'
-            '    container_name: bazarr\n'
-            '    environment:\n'
-            '      - PUID=13013\n'
-            '      - PGID=13000\n'
-            '      - TZ=' + self.timezone + '\n'
-            '    volumes:\n'
-            '      - ' + self.config_dir + '/bazarr-config:/config\n'
-            '      - ' + self.root_dir + '/data/media:/media\n'
-            '    ports:\n'
-            '      - "6767:6767"\n'
             '    restart: unless-stopped\n\n'
         )
 
@@ -167,6 +97,7 @@ class ContainerConfig:
             '      - PUID=13005\n'
             '      - PGID=13000\n'
             '      - UMASK=002\n'
+            '      - TZ=' + self.timezone + '\n'
             '    volumes:\n'
             '      - ' + self.config_dir + '/mylar-config:/config\n'
             '      - ' + self.root_dir + '/data:/data\n'
@@ -178,11 +109,13 @@ class ContainerConfig:
     def audiobookshelf(self):
         return (
             '  audiobookshelf:\n'
+            '    user: 13006:13000\n'
             '    image: ghcr.io/advplyr/audiobookshelf:latest\n'
             '    container_name: audiobookshelf\n'
             '    environment:\n'
-            '      - AUDIOBOOKSHELF_UID=13009\n'
-            '      - AUDIOBOOKSHELF_GID=13000\n'
+            '      - TZ=' + self.timezone + '\n'
+            '#      - AUDIOBOOKSHELF_UID=13009\n'
+            '#      - AUDIOBOOKSHELF_GID=13000\n'
             '    volumes:\n'
             '      - ' + self.config_dir + '/audiobookshelf:/config\n'
             '      - ' + self.root_dir + '/data/audiobooks:/audiobooks\n'
@@ -193,13 +126,30 @@ class ContainerConfig:
             '    restart: unless-stopped\n\n'
         )
 
+    def bazarr(self):
+        return (
+            '  bazarr:\n'
+            '    image: lscr.io/linuxserver/bazarr:latest\n'
+            '    container_name: bazarr\n'
+            '    environment:\n'
+            '      - PUID=13007\n'
+            '      - PGID=13000\n'
+            '      - TZ=' + self.timezone + '\n'
+            '    volumes:\n'
+            '      - ' + self.config_dir + '/bazarr-config:/config\n'
+            '      - ' + self.root_dir + '/data/media:/media\n'
+            '    ports:\n'
+            '      - "6767:6767"\n'
+            '    restart: unless-stopped\n\n'
+        )
+    
     def prowlarr(self):
         return (
             '  prowlarr:\n'
             '    image: lscr.io/linuxserver/prowlarr:develop\n'
             '    container_name: prowlarr\n'
             '    environment:\n'
-            '      - PUID=13006\n'
+            '      - PUID=13008\n'
             '      - PGID=13000\n'
             '      - UMASK=002\n'
             '      - TZ=' + self.timezone + '\n'
@@ -210,24 +160,89 @@ class ContainerConfig:
             '    restart: unless-stopped\n\n'
         )
 
-    def qbittorrent(self):
+    def jackett(self):
         return (
-            '  qbittorrent:\n'
-            '    image: lscr.io/linuxserver/qbittorrent:latest\n'
-            '    container_name: qbittorrent\n'
+            '  jackett:\n'
+            '    image: lscr.io/linuxserver/jackett:latest\n'
+            '    container_name: jackett\n'
             '    environment:\n'
-            '      - PUID=13007\n'
+            '      - PUID=13009\n'
             '      - PGID=13000\n'
             '      - UMASK=002\n'
             '      - TZ=' + self.timezone + '\n'
-            '      - WEBUI_PORT=8080\n'
             '    volumes:\n'
-            '      - ' + self.config_dir + '/qbittorrent-config:/config\n'
-            '      - ' + self.torrent_dir + ':/data/torrents\n'
+            '      - ' + self.config_dir + '/jackett-config:/config\n'
             '    ports:\n'
-            '      - "8080:8080"\n'
-            '      - "6881:6881"\n'
-            '      - "6881:6881/udp"\n'
+            '      - 9117:9117\n'
+            '    restart: unless-stopped\n\n'
+        )
+
+    def flaresolverr(self):
+        return (
+            '  flaresolverr:\n'
+            '    image: ghcr.io/flaresolverr/flaresolverr:latest\n'
+            '    container_name: flaresolverr\n'
+            '    environment:\n'
+            '      - LOG_LEVEL=${LOG_LEVEL:-info}\n'
+            '      - LOG_HTML=${LOG_HTML:-false}\n'
+            '      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}\n'
+            '      - TZ=' + self.timezone + '\n'
+            '    ports:\n'
+            '      - "8191:8191"\n'
+            '    restart: unless-stopped\n\n'
+        )
+      
+    def plex(self):
+        return (
+            '  plex:\n'
+            '    image: lscr.io/linuxserver/plex:latest\n'
+            '    container_name: plex\n'
+            '    network_mode: host\n'
+            '    environment:\n'
+            '      - PUID=13010\n'
+            '      - PGID=13000\n'
+            '      - TZ=' + self.timezone + '\n'
+            '      - VERSION=docker\n'
+            '      - PLEX_CLAIM=' + self.plex_claim + '\n'
+            '    volumes:\n'
+            '      - ' + self.config_dir + '/plex-config:/config\n'
+            '      - ' + self.root_dir + '/data/media:/media\n'
+            '    restart: unless-stopped\n\n'
+        )
+
+    def tautulli(self):
+        return (
+            '  tautulli:\n'
+            '    image: lscr.io/linuxserver/tautulli:latest\n'
+            '    container_name: tautulli\n'
+            '    depends_on:\n'
+            '      - plex\n'
+            '    environment:\n'
+            '      - PUID=${UID}\n'
+            '      - PGID=13000\n'
+            '      - TZ=' + self.timezone + '\n'
+            '    volumes:\n'
+            '      - ' + self.config_dir + '/tautulli-config:/config\n'
+            '    ports:\n'
+            '      - "8181:8181"\n'
+            '    restart: unless-stopped\n\n'
+        )
+
+    def jellyfin(self):
+        return (
+            '  jellyfin:\n'
+            '    image: lscr.io/linuxserver/jellyfin:latest\n'
+            '    container_name: jellyfin\n'
+            '    environment:\n'
+            '      - PUID=${UID}\n'
+            '      - PGID=13000\n'
+            '      - UMASK=002\n'
+            '      - TZ=' + self.timezone + '\n'
+            '    volumes:\n'
+            '      - ' + self.config_dir + '/jellyfin-config:/config\n'
+            '      - ' + self.root_dir + '/data/media:/data\n'
+            '    ports:\n'
+            '      - "8096:8096"\n'
             '    restart: unless-stopped\n\n'
         )
 
@@ -237,7 +252,7 @@ class ContainerConfig:
             '    image: sctx/overseerr:latest\n'
             '    container_name: overseerr\n'
             '    environment:\n'
-            '      - PUID=13009\n'
+            '      - PUID=13011\n'
             '      - PGID=13000\n'
             '      - UMASK=002\n'
             '      - TZ=' + self.timezone + '\n'
@@ -265,13 +280,34 @@ class ContainerConfig:
             '    restart: unless-stopped\n\n'
         )
 
+    def qbittorrent(self):
+        return (
+            '  qbittorrent:\n'
+            '    image: lscr.io/linuxserver/qbittorrent:latest\n'
+            '    container_name: qbittorrent\n'
+            '    environment:\n'
+            '      - PUID=13013\n'
+            '      - PGID=13000\n'
+            '      - UMASK=002\n'
+            '      - TZ=' + self.timezone + '\n'
+            '      - WEBUI_PORT=8080\n'
+            '    volumes:\n'
+            '      - ' + self.config_dir + '/qbittorrent-config:/config\n'
+            '      - ' + self.torrent_dir + ':/data/torrents\n'
+            '    ports:\n'
+            '      - "8080:8080"\n'
+            '      - "6881:6881"\n'
+            '      - "6881:6881/udp"\n'
+            '    restart: unless-stopped\n\n'
+        )
+    
     def sabnzbd(self):
         return (
             '  sabnzbd:\n'
             '    image: lscr.io/linuxserver/sabnzbd:latest\n'
             '    container_name: sabnzbd\n'
             '    environment:\n'
-            '      - PUID=13011\n'
+            '      - PUID=13014\n'
             '      - PGID=13000\n'
             '      - UMASK=002\n'
             '      - TZ=' + self.timezone + '\n'
@@ -283,18 +319,4 @@ class ContainerConfig:
             '    restart: unless-stopped\n\n'
         )
     
-    def flaresolverr(self):
-        return (
-            '  flaresolverr:\n'
-            '    image: ghcr.io/flaresolverr/flaresolverr:latest\n'
-            '    container_name: flaresolverr\n'
-            '    environment:\n'
-            '      - LOG_LEVEL=${LOG_LEVEL:-info}\n'
-            '      - LOG_HTML=${LOG_HTML:-false}\n'
-            '      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}\n'
-            '      - TZ=' + self.timezone + '\n'
-            '    ports:\n'
-            '      - "8191:8191"\n'
-            '    restart: unless-stopped\n\n'
-        )
         
