@@ -43,20 +43,24 @@ crash*. It doesn't necessarily mean it will run well on your system ;) It featur
 ### Using the CLI
 To make things easier, a CLI has been developed. First, clone the repository in a directory of your
 choosing. You can run it by entering `python main.py` and the CLI will guide you through the
-process. Please take a look at [important notes](#important-notes) before you continue.
+process. Please take a look at [important notes](#important-notes) before you continue. 
+**This is the recommended method at the moment.**
 
 ### Manually
+Manual installation currently isn't very sophisticated, but it can be done.
 1. To get started, clone the repository in a directory of your choosing. **Note: this will be where
    your installation and media will be as well, so think about this a bit.**
-2. Copy `.env.sample` to a real `.env` by running `$ cp .env.sample .env`.
-3. Set the environment variables to your liking. Note that `ROOT_DIR` should be the directory you
-   have cloned this in.
+2. ~~Copy `.env.sample` to a real `.env` by running `$ cp .env.sample .env`.~~
+3. ~~Set the environment variables to your liking. Note that `ROOT_DIR` should be the directory you
+   have cloned this in.~~
 4. Run `setup.sh` as superuser. This will set up your users, a system of directories, ensure
    permissions are set correctly and sets some more environment variables for docker compose.
 5. Take a look at the `docker-compose.yml` file. If there are services you would like to ignore
    (for example, running PleX and Jellyfin at the same time is a bit unusual), you can comment them
    out by placing `#` in front of the lines. This ensures they are ignored by Docker compose.
-6. Run `docker compose up`.
+   You also need to replace the timezones and root folders. The default timezone is Europe/Amsterdam
+   and the default root folder is /ezarr. This is most easily done in a text editor with find and replace.
+6. Run `docker compose up -d`.
 
 That's it! Your containers are now up and you can continue to set up the settings in them. Please
 take a look at [important notes](#important-notes) before you continue.
@@ -76,6 +80,13 @@ take a look at [important notes](#important-notes) before you continue.
   field: `chmod -R 775 "%F/"`.
 - You'll have to add indexers in Prowlarr by hand. Use Prowlarrs settings to connect it to the
   other -arr apps.
+
+### IMPORTANT IF USING NFS SHARES
+- NFS shares' permissions are mapped by user IDs. If you want to access a file as a client, your user ID needs to match the user ID of the owner (or group) of that file on the NFS server. 
+Note that if you are a group member (and not the owner), having matching group IDs won't be enough, there also needs to be a corresponding user on the NFS server. The easiest way to make sure
+the users and groups are set up on both sides correctly is to run setup.sh on both your NFS server and your client. Preferably run it on the server first.
+If you are running this script on the client make sure that you temporarily enable -no-root-squash on your NFS server, as the script needs superuser privileges to run and by deafult on NFS the root
+user is mapped to nowhere to prevent abuse.
   
 ### SABnzbd External internet access denied message
 When you're trying to access SABnzbd the first time you'll come across the message `External
@@ -92,7 +103,9 @@ official SABnzbd website.
 ## FAQ
 
 ### How to update containers
-If you'd like to update containers, you can move to the directory of your `docker-compose.yml` file
+There is a `update_containers.sh` script that takes care of this. Simply run it and it updates
+all containers and removes old images. It's essentially the following steps but automated:
+If you'd like to it manually, go to the directory of your `docker-compose.yml` file
 and run `(sudo) docker compose pull`. This pulls the newest versions of all images (blueprints for
 containers) listed in the `docker-compose.yml` file. Then, you can run `(sudo) docker compose up
 -d`. This will deploy the new versions without losing uptime. Afterwards, you can run `(sudo)
