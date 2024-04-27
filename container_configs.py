@@ -114,8 +114,6 @@ class ContainerConfig:
             '    container_name: audiobookshelf\n'
             '    environment:\n'
             '      - TZ=' + self.timezone + '\n'
-            '#      - AUDIOBOOKSHELF_UID=13009\n'
-            '#      - AUDIOBOOKSHELF_GID=13000\n'
             '    volumes:\n'
             '      - ' + self.config_dir + '/audiobookshelf:/config\n'
             '      - ' + self.root_dir + '/data/audiobooks:/audiobooks\n'

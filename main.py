@@ -116,7 +116,7 @@ print('\n===CONFIGURATION===')
 print('Please enter your timezone (like "Europe/Amsterdam") or press enter to use your PCs configured timezone:', end=' ')
 timezone = input()
 if (timezone == ''):
-    timezone = open("/etc/timezone", "r").readline()
+    timezone = open("/etc/timezone", "r").readline().rstrip('\n')
 
 if len(timezone) == 0: # if user pressed enter and reading timezone from /etc/timezone failed then default to Amsterdam
     timezone = 'Europe/Amsterdam'

@@ -8,7 +8,7 @@ services:
       - PUID=13001
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Sarajevo
     volumes:
       - /ezarr/config/sonarr-config:/config
       - /ezarr/data:/data
@@ -23,7 +23,7 @@ services:
       - PUID=13002
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Sarajevo
     volumes:
       - /ezarr/config/radarr-config:/config
       - /ezarr/data:/data
@@ -38,7 +38,7 @@ services:
       - PUID=13003
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Sarajevo
     volumes:
       - /ezarr/config/lidarr-config:/config
       - /ezarr/data:/data
@@ -53,7 +53,7 @@ services:
       - PUID=13004
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Sarajevo
     volumes:
       - /ezarr/config/readarr-config:/config
       - /ezarr/data:/data
@@ -68,6 +68,7 @@ services:
       - PUID=13005
       - PGID=13000
       - UMASK=002
+      - TZ=Europe/Sarajevo
     volumes:
       - /ezarr/config/mylar-config:/config
       - /ezarr/data:/data
@@ -76,11 +77,11 @@ services:
     restart: unless-stopped
 
   audiobookshelf:
+    user: 13006:13000
     image: ghcr.io/advplyr/audiobookshelf:latest
     container_name: audiobookshelf
     environment:
-      - AUDIOBOOKSHELF_UID=13009
-      - AUDIOBOOKSHELF_GID=13000
+      - TZ=Europe/Sarajevo
     volumes:
       - /ezarr/config/audiobookshelf:/config
       - /ezarr/data/audiobooks:/audiobooks
@@ -94,9 +95,9 @@ services:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
     environment:
-      - PUID=13013
+      - PUID=13007
       - PGID=13000
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Sarajevo
     volumes:
       - /ezarr/config/bazarr-config:/config
       - /ezarr/data/media:/media
@@ -108,10 +109,10 @@ services:
     image: sctx/overseerr:latest
     container_name: overseerr
     environment:
-      - PUID=13009
+      - PUID=13011
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Sarajevo
     volumes:
       - /ezarr/config/overseerr-config:/app/config
     ports:
@@ -125,7 +126,7 @@ services:
       - PUID=13012
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Sarajevo
     volumes:
       - /ezarr/config/jellyseerr-config:/app/config
     ports:
@@ -136,14 +137,28 @@ services:
     image: lscr.io/linuxserver/prowlarr:develop
     container_name: prowlarr
     environment:
-      - PUID=13006
+      - PUID=13008
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Sarajevo
     volumes:
       - /ezarr/config/prowlarr-config:/config
     ports:
       - "9696:9696"
+    restart: unless-stopped
+
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    environment:
+      - PUID=13009
+      - PGID=13000
+      - UMASK=002
+      - TZ=Europe/Sarajevo
+    volumes:
+      - /ezarr/config/jackett-config:/config
+    ports:
+      - 9117:9117
     restart: unless-stopped
 
   flaresolverr:
@@ -153,7 +168,7 @@ services:
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - LOG_HTML=${LOG_HTML:-false}
       - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Sarajevo
     ports:
       - "8191:8191"
     restart: unless-stopped
@@ -165,6 +180,7 @@ services:
     environment:
       - PUID=13010
       - PGID=13000
+      - TZ=Europe/Sarajevo
       - VERSION=docker
       - PLEX_CLAIM=
     volumes:
@@ -180,7 +196,7 @@ services:
     environment:
       - PUID=${UID}
       - PGID=13000
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Sarajevo
     volumes:
       - /ezarr/config/tautulli-config:/config
     ports:
@@ -194,7 +210,7 @@ services:
       - PUID=${UID}
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Sarajevo
     volumes:
       - /ezarr/config/jellyfin-config:/config
       - /ezarr/data/media:/data
@@ -206,10 +222,10 @@ services:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     environment:
-      - PUID=13007
+      - PUID=13013
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Sarajevo
       - WEBUI_PORT=8080
     volumes:
       - /ezarr/config/qbittorrent-config:/config
@@ -224,10 +240,10 @@ services:
     image: lscr.io/linuxserver/sabnzbd:latest
     container_name: sabnzbd
     environment:
-      - PUID=13011
+      - PUID=13014
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Sarajevo
     volumes:
       - /ezarr/config/sabnzbd-config:/config
       - /ezarr/data/usenet:/downloads
