@@ -282,3 +282,19 @@ class ContainerConfig:
             '      - "8081:8080"\n'
             '    restart: unless-stopped\n\n'
         )
+    
+    def flaresolverr(self):
+        return (
+            '  flaresolverr:\n'
+            '    image: ghcr.io/flaresolverr/flaresolverr:latest\n'
+            '    container_name: flaresolverr\n'
+            '    environment:\n'
+            '      - LOG_LEVEL=${LOG_LEVEL:-info}\n'
+            '      - LOG_HTML=${LOG_HTML:-false}\n'
+            '      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}\n'
+            '      - TZ=' + self.timezone + '\n'
+            '    ports:\n'
+            '      - "8191:8191"\n'
+            '    restart: unless-stopped\n\n'
+        )
+        

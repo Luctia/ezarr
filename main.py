@@ -65,6 +65,11 @@ take_input('prowlarr', 'indexer')
 if len(services_classed['indexer']) == 0:
     print('Warning: no indexing service selected.')
 
+print('\n===CLOUDFLARE BYPASS===')
+services_classed['bypass'] = []
+print('Use Flaresolverr? [Y/n]', end=" ")
+take_input('flaresolverr', 'bypass')
+
 print('\n===MEDIA SERVERS===')
 services_classed['ms'] = []
 print('Use PleX? [Y/n]', end=" ")
@@ -105,10 +110,15 @@ if len(services) == 0:
     exit(1)
 
 print('\n===CONFIGURATION===')
-print('Please enter your timezone (like "Europe/Amsterdam")', end=' ')
+
+print('Please enter your timezone (like "Europe/Amsterdam") or press enter to use your PCs configured timezone:', end=' ')
 timezone = input()
-if len(timezone) == 0:
+if (timezone == ''):
+    timezone = open("/etc/timezone", "r").readline()
+
+if len(timezone) == 0: # if user pressed enter and reading timezone from /etc/timezone failed then default to Amsterdam
     timezone = 'Europe/Amsterdam'
+
 plex_claim = ''
 if services.__contains__('plex'):
     print('If you have a PleX claim token, enter it now. Otherwise, just press enter.', end=' ')
