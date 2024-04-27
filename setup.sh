@@ -17,6 +17,12 @@ sudo useradd qbittorrent -u 130013
 sudo useradd sabnzbd -u 13014
 
 sudo groupadd mediacenter -g 13000
+
+# Adds current user to the mediacenter group. This is recommended so that you can still have access to files inside the ezarr folder structure for manual manipulation.
+# This is way better than just doing everything as root, especially on NFS shares. Also some services run as the default user anyway (Jellyfin, Tautulli) so this is necessary
+sudo usermod -a -G mediacenter $USER
+
+# adds all the service users to the group 
 sudo usermod -a -G mediacenter sonarr
 sudo usermod -a -G mediacenter radarr
 sudo usermod -a -G mediacenter lidarr
