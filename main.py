@@ -62,6 +62,8 @@ print('\n===INDEXERS===')
 services_classed['indexer'] = []
 print('Use Prowlarr? [Y/n]', end=" ")
 take_input('prowlarr', 'indexer')
+print('Use Jackett? [Y/n]', end=" ")
+take_input('jackett', 'indexer')
 if len(services_classed['indexer']) == 0:
     print('Warning: no indexing service selected.')
 

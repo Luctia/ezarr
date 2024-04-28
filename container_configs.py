@@ -181,13 +181,13 @@ class ContainerConfig:
             '    image: ghcr.io/advplyr/audiobookshelf:latest\n'
             '    container_name: audiobookshelf\n'
             '    environment:\n'
-            '      - AUDIOBOOKSHELF_UID=13009\n'
-            '      - AUDIOBOOKSHELF_GID=13000\n'
+            '      - user=13014:13000\n'
+            '      - TZ=' + self.timezone + '\n'
             '    volumes:\n'
             '      - ' + self.config_dir + '/audiobookshelf:/config\n'
-            '      - ' + self.root_dir + '/data/audiobooks:/audiobooks\n'
-            '      - ' + self.root_dir + '/data/podcasts:/podcasts\n'
-            '      - ' + self.root_dir + '/data/metadata:/metadata\n'
+            '      - ' + self.root_dir + '/data/media/audiobooks:/audiobooks\n'
+            '      - ' + self.root_dir + '/data/media/podcasts:/podcasts\n'
+            '      - ' + self.root_dir + '/data/media/audiobookshelf-metadata:/metadata\n'
             '    ports:\n'
             '      - "13378:80"\n'
             '    restart: unless-stopped\n\n'
@@ -280,6 +280,23 @@ class ContainerConfig:
             '      - ' + self.usenet_dir + ':/downloads\n'
             '    ports:\n'
             '      - "8081:8080"\n'
+            '    restart: unless-stopped\n\n'
+        )
+    
+    def jackett(self):
+        return (
+            '  jackett:\n'
+            '    image: lscr.io/linuxserver/jackett:latest\n'
+            '    container_name: jackett\n'
+            '    environment:\n'
+            '      - PUID=13008\n'
+            '      - PGID=13000\n'
+            '      - UMASK=002\n'
+            '      - TZ=' + self.timezone + '\n'
+            '    volumes:\n'
+            '      - ' + self.config_dir + '/jackett-config:/config\n'
+            '    ports:\n'
+            '      - 9117:9117\n'
             '    restart: unless-stopped\n\n'
         )
     
