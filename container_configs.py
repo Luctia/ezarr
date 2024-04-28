@@ -109,10 +109,10 @@ class ContainerConfig:
     def audiobookshelf(self):
         return (
             '  audiobookshelf:\n'
-            '    user: 13006:13000\n'
             '    image: ghcr.io/advplyr/audiobookshelf:latest\n'
             '    container_name: audiobookshelf\n'
             '    environment:\n'
+            '      - user=13006:13000\n'
             '      - TZ=' + self.timezone + '\n'
             '    volumes:\n'
             '      - ' + self.config_dir + '/audiobookshelf:/config\n'

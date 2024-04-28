@@ -9,7 +9,7 @@ class UserGroupSetup:
 
     def create_config_dir(self, service_name):
         os.system(
-            f'sudo mkdir -p {self.root_dir}/config/{service_name}-config'
+            f'sudo mkdir -p {self.root_dir}/config/{service_name}-config -m 775' # -m 775 gives read/write access to the whole mediacenter group, change to 755 for only read
             f' ; sudo chown -R {service_name}:mediacenter {self.root_dir}/config/{service_name}-config'
         )
 
