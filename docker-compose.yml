@@ -84,9 +84,9 @@ services:
       - TZ=Europe/Sarajevo
     volumes:
       - /ezarr/config/audiobookshelf:/config
-      - /ezarr/data/audiobooks:/audiobooks
-      - /ezarr/data/podcasts:/podcasts
-      - /ezarr/data/metadata:/metadata
+      - /ezarr/data/media/audiobooks:/audiobooks
+      - /ezarr/data/media/podcasts:/podcasts
+      - /ezarr/data/media/audiobookshelf-metadata:/metadata
     ports:
       - "13378:80"
     restart: unless-stopped
