@@ -4,14 +4,6 @@ from users_groups_setup import UserGroupSetup
 services_classed = dict()
 
 
-def take_input(service_name, service_type):
-    choice = input()
-    if choice == 'Y' or choice == 'y' or choice == '':
-        services_classed[service_type].append(service_name)
-    elif choice != 'n' and choice != 'N':
-        print('Invalid input, please enter Y or N. Not adding ' + service_name + ".")
-
-
 def take_boolean_input(default=True):
     while True:
         ans = input()
@@ -23,6 +15,12 @@ def take_boolean_input(default=True):
             return False
         print('Please answer with y or n.', end=' ')
 
+def take_input(service_name, service_type):
+    choice = take_boolean_input()
+    if choice:
+        services_classed[service_type].append(service_name)
+    else:
+        print('Invalid input, please enter Y or N. Not adding ' + service_name + ".")
 
 def take_directory_input():
     while True:
@@ -137,15 +135,24 @@ compose.write(
 )
 
 container_config = ContainerConfig(root_dir, timezone, plex_claim=plex_claim)
-permission_setup = UserGroupSetup(root_dir=root_dir)
 
 for service in services:
-    try:
-        getattr(permission_setup, service)()
-    except AttributeError:
-        pass
     compose.write(getattr(container_config, service)())
 compose.close()
+print("Docker compose file generated successfully.")
+
+print("Do you want to also generate the required folder structure and permissions? (this is required for first time setup) [Y/N]: ")
+generate_permissions = take_boolean_input()
+if generate_permissions:
+    permission_setup = UserGroupSetup(root_dir=root_dir)
+    for service in services:
+        try:
+            getattr(permission_setup, service)()
+        except AttributeError:
+            pass
+else: 
+    print("Aborted.")
+
 
 print('Process complete. You can now run "docker compose up -d" to start your containers.')
 print('Thank you for using EZarr. If you experience any issues or have feature requests, add them to our issues.')
