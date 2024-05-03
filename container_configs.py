@@ -1,3 +1,5 @@
+import os 
+
 class ContainerConfig:
     def __init__(self,
                  root_dir,
@@ -15,6 +17,7 @@ class ContainerConfig:
         self.comic_dir = root_dir + '/media/comics'
         self.torrent_dir = root_dir + '/data/torrents'
         self.usenet_dir = root_dir + '/data/usenet'
+        self.UID = os.popen('id -u').read().rstrip('\n')
 
     def plex(self):
         return (
@@ -41,7 +44,7 @@ class ContainerConfig:
             '    depends_on:\n'
             '      - plex\n'
             '    environment:\n'
-            '      - PUID=${UID}\n'
+            '      - PUID='+ self.UID + '\n'
             '      - PGID=13000\n'
             '      - TZ=' + self.timezone + '\n'
             '    volumes:\n'
@@ -57,7 +60,7 @@ class ContainerConfig:
             '    image: lscr.io/linuxserver/jellyfin:latest\n'
             '    container_name: jellyfin\n'
             '    environment:\n'
-            '      - PUID=${UID}\n'
+            '      - PUID='+ self.UID + '\n'
             '      - PGID=13000\n'
             '      - UMASK=002\n'
             '      - TZ=' + self.timezone + '\n'
