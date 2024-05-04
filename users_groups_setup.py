@@ -5,12 +5,18 @@ class UserGroupSetup:
     def __init__(self, root_dir='/'):
         self.root_dir = root_dir
         os.system('sudo groupadd mediacenter -g 13000')
-        os.system('sudo usermod -a -G mediacenter $USER') 
+        os.system('sudo usermod -a -G mediacenter $USER')
+        os.system(
+            '/bin/bash -c "sudo mkdir -pv ' + self.root_dir + '/data/{media,usenet,torrents} -m 775'
+            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data'
+            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data/{media,usenet,torrents}"'
+        )
 
     def create_config_dir(self, service_name):
         os.system(
             f'sudo mkdir -p {self.root_dir}/config/{service_name}-config -m 775' # -m 775 gives read/write access to the whole mediacenter group, change to 755 for only read
             f' ; sudo chown -R {service_name}:mediacenter {self.root_dir}/config/{service_name}-config'
+            f' ; sudo chown $(id -u):mediacenter {self.root_dir}/config'
         )
 
     def sonarr(self):
@@ -66,10 +72,8 @@ class UserGroupSetup:
     def audiobookshelf(self):
         os.system(
             '/bin/bash -c "sudo useradd audiobookshelf -u 13014'
-            ' ; sudo mkdir -pv ' + self.root_dir + '/data/{media,usenet,torrents}/audiobooks -m 775'
-            ' ; sudo chown -R audiobookshelf:mediacenter ' + self.root_dir + '/data/{media,usenet,torrents}/audiobooks'
-            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data'
-            ' ; sudo chown $(id -u):mediacenter ' + self.root_dir + '/data/{media,usenet,torrents}"'
+            ' ; sudo mkdir -pv ' + self.root_dir + '/data/media/{audiobooks,podcasts,audiobookshelf-metadata} -m 775'
+            ' ; sudo chown -R audiobookshelf:mediacenter ' + self.root_dir + '/data/media/{audiobooks,podcasts,audiobookshelf-metadata}"'
         )
         self.create_config_dir('audiobookshelf')
         os.system('sudo usermod -a -G mediacenter audiobookshelf')
