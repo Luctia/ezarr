@@ -130,7 +130,6 @@ root_dir = take_directory_input()
 compose = open('docker-compose.yml', 'w')
 compose.write(
     '---\n'
-    'version: "3.1"\n'
     'services:\n'
 )
 
