@@ -20,7 +20,7 @@ def take_input(service_name, service_type):
     if choice:
         services_classed[service_type].append(service_name)
     else:
-        print('Invalid input, please enter Y or N. Not adding ' + service_name + ".")
+        print('Not adding ' + service_name + ".")
 
 def take_directory_input():
     while True:
@@ -111,7 +111,7 @@ if len(services) == 0:
 
 print('\n===CONFIGURATION===')
 
-print('Please enter your timezone (like "Europe/Amsterdam") or press enter to use your PCs configured timezone:', end=' ')
+print('Please enter your timezone (like "Europe/Amsterdam") or press enter to use your system\'s configured timezone:', end=' ')
 timezone = input()
 if (timezone == ''):
     timezone = open("/etc/timezone", "r").readline()
@@ -140,7 +140,7 @@ for service in services:
 compose.close()
 print("Docker compose file generated successfully.")
 
-print("Do you want to also generate the required folder structure and permissions? (this is required for first time setup) [Y/N]: ")
+print("Do you want to also generate the required folder structure and permissions? (this is required for first time setup) [Y/n]: ")
 generate_permissions = take_boolean_input()
 if generate_permissions:
     permission_setup = UserGroupSetup(root_dir=root_dir)
@@ -150,7 +150,7 @@ if generate_permissions:
         except AttributeError:
             pass
 else: 
-    print("Aborted.")
+    print("Permission and folder structure generation skipped by user.")
 
 
 print('Process complete. You can now run "docker compose up -d" to start your containers.')

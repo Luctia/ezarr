@@ -29,7 +29,7 @@ sudo groupadd mediacenter -g $MEDIACENTER_GID
 # Adds current user to the mediacenter group. This is recommended so that you can still have access to files inside the ezarr folder structure for manual control.
 # This is way better than just doing everything as root, especially on NFS shares. Also some services run as the default user anyway (Jellyfin, Tautulli).
 sudo usermod -a -G mediacenter $USER
-# When you add the user to the group the cahanges don't take effect immediately. 
+# When you add the user to the group the changes don't take effect immediately. 
 # You can force them by running "sudo newgrp mediacenter" but that won't always work and it's better to just reboot after the script finishes running.
 
 # adds all the service users to the group 

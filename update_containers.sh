@@ -10,6 +10,5 @@
 # if that isnt enough then reboot
 
 docker compose pull
-docker compose down
 docker compose up -d
 docker image prune -f

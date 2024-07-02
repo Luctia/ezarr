@@ -42,9 +42,10 @@ It's set up to follow the [TRaSH guidelines](https://trash-guides.info/Hardlinks
 - [Jellyseerr](https://github.com/Fallenbagel/jellyseerr) is like Overseerr, but for Jellyfin.
 
 ## Requirements
-Currently this script only works on Linux. The only requirements other than that are **Python 3** and **docker** with **docker-compose-v2**.
+Currently this script only works on Linux. There is a chance that the sample docker compose file will work on Windows, although untested.
+The only requirements other than that are **Python 3** and **docker** with **docker-compose-v2**.
 While this script _may_ work on docker-compose-v1 it's made to be and highly recommended to be run using v2.
-The easiest way to install these dependencies on Ubuntu is by running:
+The easiest way to install these dependencies on Ubuntu and other Debian-based distors is by running:
 ```
 sudo apt-get install python3 docker.io docker-compose-v2
 ```
@@ -85,6 +86,8 @@ That's it! Your containers are now up and you can continue to set up the setting
 take a look at [important notes](#important-notes) before you continue.
 
 ## Important notes
+- You probably shouldn't run the python script as root. Ideally you should create a brand new user that's just for these services, but any regular user will do.
+  It will need your password for `sudo` to set up the permissions and folder structures, but you shouldn't run it *as* root.
 - If you already used this script previously and want to clean up old users, run `remove_old_users.sh`.
   This is also recommended if you are updating from an earlier version of this script, since there were previously some conflicts in user IDs.
 - It is recommended to restart your system after script completion, so that newly created users and groups can be loaded properly.
