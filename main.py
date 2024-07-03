@@ -4,14 +4,6 @@ from users_groups_setup import UserGroupSetup
 services_classed = dict()
 
 
-def take_input(service_name, service_type):
-    choice = input()
-    if choice == 'Y' or choice == 'y' or choice == '':
-        services_classed[service_type].append(service_name)
-    elif choice != 'n' and choice != 'N':
-        print('Invalid input, please enter Y or N. Not adding ' + service_name + ".")
-
-
 def take_boolean_input(default=True):
     while True:
         ans = input()
@@ -23,6 +15,12 @@ def take_boolean_input(default=True):
             return False
         print('Please answer with y or n.', end=' ')
 
+def take_input(service_name, service_type):
+    choice = take_boolean_input()
+    if choice:
+        services_classed[service_type].append(service_name)
+    else:
+        print('Not adding ' + service_name + ".")
 
 def take_directory_input():
     while True:
@@ -62,8 +60,15 @@ print('\n===INDEXERS===')
 services_classed['indexer'] = []
 print('Use Prowlarr? [Y/n]', end=" ")
 take_input('prowlarr', 'indexer')
+print('Use Jackett? [Y/n]', end=" ")
+take_input('jackett', 'indexer')
 if len(services_classed['indexer']) == 0:
     print('Warning: no indexing service selected.')
+
+print('\n===CLOUDFLARE BYPASS===')
+services_classed['bypass'] = []
+print('Use Flaresolverr? [Y/n]', end=" ")
+take_input('flaresolverr', 'bypass')
 
 print('\n===MEDIA SERVERS===')
 services_classed['ms'] = []
@@ -105,10 +110,15 @@ if len(services) == 0:
     exit(1)
 
 print('\n===CONFIGURATION===')
-print('Please enter your timezone (like "Europe/Amsterdam")', end=' ')
+
+print('Please enter your timezone (like "Europe/Amsterdam") or press enter to use your system\'s configured timezone:', end=' ')
 timezone = input()
-if len(timezone) == 0:
+if (timezone == ''):
+    timezone = open("/etc/timezone", "r").readline()
+
+if len(timezone) == 0: # if user pressed enter and reading timezone from /etc/timezone failed then default to Amsterdam
     timezone = 'Europe/Amsterdam'
+
 plex_claim = ''
 if services.__contains__('plex'):
     print('If you have a PleX claim token, enter it now. Otherwise, just press enter.', end=' ')
@@ -120,20 +130,28 @@ root_dir = take_directory_input()
 compose = open('docker-compose.yml', 'w')
 compose.write(
     '---\n'
-    'version: "3.1"\n'
     'services:\n'
 )
 
 container_config = ContainerConfig(root_dir, timezone, plex_claim=plex_claim)
-permission_setup = UserGroupSetup(root_dir=root_dir)
 
 for service in services:
-    try:
-        getattr(permission_setup, service)()
-    except AttributeError:
-        pass
     compose.write(getattr(container_config, service)())
 compose.close()
+print("Docker compose file generated successfully.")
+
+print("Do you want to also generate the required folder structure and permissions? (this is required for first time setup) [Y/n]: ")
+generate_permissions = take_boolean_input()
+if generate_permissions:
+    permission_setup = UserGroupSetup(root_dir=root_dir)
+    for service in services:
+        try:
+            getattr(permission_setup, service)()
+        except AttributeError:
+            pass
+else: 
+    print("Permission and folder structure generation skipped by user.")
+
 
 print('Process complete. You can now run "docker compose up -d" to start your containers.')
 print('Thank you for using EZarr. If you experience any issues or have feature requests, add them to our issues.')

@@ -1,3 +1,5 @@
+import os 
+
 class ContainerConfig:
     def __init__(self,
                  root_dir,
@@ -15,6 +17,7 @@ class ContainerConfig:
         self.comic_dir = root_dir + '/media/comics'
         self.torrent_dir = root_dir + '/data/torrents'
         self.usenet_dir = root_dir + '/data/usenet'
+        self.UID = os.popen('id -u').read().rstrip('\n')
 
     def plex(self):
         return (
@@ -41,7 +44,7 @@ class ContainerConfig:
             '    depends_on:\n'
             '      - plex\n'
             '    environment:\n'
-            '      - PUID=${UID}\n'
+            '      - PUID='+ self.UID + '\n'
             '      - PGID=13000\n'
             '      - TZ=' + self.timezone + '\n'
             '    volumes:\n'
@@ -57,7 +60,7 @@ class ContainerConfig:
             '    image: lscr.io/linuxserver/jellyfin:latest\n'
             '    container_name: jellyfin\n'
             '    environment:\n'
-            '      - PUID=${UID}\n'
+            '      - PUID='+ self.UID + '\n'
             '      - PGID=13000\n'
             '      - UMASK=002\n'
             '      - TZ=' + self.timezone + '\n'
@@ -181,13 +184,13 @@ class ContainerConfig:
             '    image: ghcr.io/advplyr/audiobookshelf:latest\n'
             '    container_name: audiobookshelf\n'
             '    environment:\n'
-            '      - AUDIOBOOKSHELF_UID=13009\n'
-            '      - AUDIOBOOKSHELF_GID=13000\n'
+            '      - user=13014:13000\n'
+            '      - TZ=' + self.timezone + '\n'
             '    volumes:\n'
             '      - ' + self.config_dir + '/audiobookshelf:/config\n'
-            '      - ' + self.root_dir + '/data/audiobooks:/audiobooks\n'
-            '      - ' + self.root_dir + '/data/podcasts:/podcasts\n'
-            '      - ' + self.root_dir + '/data/metadata:/metadata\n'
+            '      - ' + self.root_dir + '/data/media/audiobooks:/audiobooks\n'
+            '      - ' + self.root_dir + '/data/media/podcasts:/podcasts\n'
+            '      - ' + self.root_dir + '/data/media/audiobookshelf-metadata:/metadata\n'
             '    ports:\n'
             '      - "13378:80"\n'
             '    restart: unless-stopped\n\n'
@@ -282,3 +285,36 @@ class ContainerConfig:
             '      - "8081:8080"\n'
             '    restart: unless-stopped\n\n'
         )
+    
+    def jackett(self):
+        return (
+            '  jackett:\n'
+            '    image: lscr.io/linuxserver/jackett:latest\n'
+            '    container_name: jackett\n'
+            '    environment:\n'
+            '      - PUID=13008\n'
+            '      - PGID=13000\n'
+            '      - UMASK=002\n'
+            '      - TZ=' + self.timezone + '\n'
+            '    volumes:\n'
+            '      - ' + self.config_dir + '/jackett-config:/config\n'
+            '    ports:\n'
+            '      - 9117:9117\n'
+            '    restart: unless-stopped\n\n'
+        )
+    
+    def flaresolverr(self):
+        return (
+            '  flaresolverr:\n'
+            '    image: ghcr.io/flaresolverr/flaresolverr:latest\n'
+            '    container_name: flaresolverr\n'
+            '    environment:\n'
+            '      - LOG_LEVEL=${LOG_LEVEL:-info}\n'
+            '      - LOG_HTML=${LOG_HTML:-false}\n'
+            '      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}\n'
+            '      - TZ=' + self.timezone + '\n'
+            '    ports:\n'
+            '      - "8191:8191"\n'
+            '    restart: unless-stopped\n\n'
+        )
+        

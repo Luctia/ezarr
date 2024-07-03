@@ -18,9 +18,12 @@ jobs:
 
       - name: Copy environment file
         run: cp .env.sample .env
+        
+      - name: Copy docker-compose file
+        run: cp docker-compose.yml.sample docker-compose.yml
 
       - name: Run setup.sh
         run: ./setup.sh
 
-      - name: Run docker-compose
-        run: docker-compose up -d
+      - name: Run docker compose
+        run: docker compose up -d
