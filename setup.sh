@@ -21,7 +21,7 @@ sudo useradd jackett -u $JACKETT_UID
 sudo useradd overseerr -u $OVERSEERR_UID
 sudo useradd plex -u $PLEX_UID
 sudo useradd sabnzbd -u $SABNZBD_UID
-sudo useradd jellyseerr -u $SABNZBD_UID
+sudo useradd jellyseerr -u $JELLYSEERR_UID
 sudo useradd bazarr -u $BAZARR_UID
 sudo useradd audiobookshelf -u $AUDIOBOOKSHELF_UID
 sudo groupadd mediacenter -g $MEDIACENTER_GID
