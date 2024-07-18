@@ -54,25 +54,25 @@ sudo mkdir -pv ${ROOT_DIR:-.}/config/{sonarr,radarr,lidarr,readarr,mylar,prowlar
 sudo mkdir -pv ${ROOT_DIR:-.}/data/{torrents,usenet,media}/{tv,movies,music,books,comics,audiobooks,podcasts,audiobookshelf-metadata}
 
 # Set permissions
-sudo chmod -R 775 data/
-sudo chmod -R 775 config/
-sudo chown -R $UID:mediacenter data/
-sudo chown -R $UID:mediacenter config/
-sudo chown -R sonarr:mediacenter config/sonarr-config
-sudo chown -R radarr:mediacenter config/radarr-config
-sudo chown -R lidarr:mediacenter config/lidarr-config
-sudo chown -R readarr:mediacenter config/readarr-config
-sudo chown -R mylar:mediacenter config/mylar-config
-sudo chown -R prowlarr:mediacenter config/prowlarr-config
-sudo chown -R qbittorrent:mediacenter config/qbittorrent-config
-sudo chown -R jackett:mediacenter config/jackett-config
-sudo chown -R overseerr:mediacenter config/overseerr-config
-sudo chown -R plex:mediacenter config/plex-config
-sudo chown -R $UID:mediacenter config/jellyfin-config
-sudo chown -R $UID:mediacenter config/tautulli-config
-sudo chown -R sabnzbd:mediacenter config/sabnzbd-config
-sudo chown -R jellyseerr:mediacenter config/jellyseerr-config
-sudo chown -R bazarr:mediacenter config/bazarr-config
-sudo chown -R audiobookshelf:mediacenter config/audiobookshelf-config
+sudo chmod -R 775 ${ROOT_DIR:-.}/data/
+sudo chmod -R 775 ${ROOT_DIR:-.}/config/
+sudo chown -R $UID:mediacenter ${ROOT_DIR:-.}/data/
+sudo chown -R $UID:mediacenter ${ROOT_DIR:-.}/config/
+sudo chown -R sonarr:mediacenter ${ROOT_DIR:-.}/config/sonarr-config
+sudo chown -R radarr:mediacenter ${ROOT_DIR:-.}/config/radarr-config
+sudo chown -R lidarr:mediacenter ${ROOT_DIR:-.}/config/lidarr-config
+sudo chown -R readarr:mediacenter ${ROOT_DIR:-.}/config/readarr-config
+sudo chown -R mylar:mediacenter ${ROOT_DIR:-.}/config/mylar-config
+sudo chown -R prowlarr:mediacenter ${ROOT_DIR:-.}/config/prowlarr-config
+sudo chown -R qbittorrent:mediacenter ${ROOT_DIR:-.}/config/qbittorrent-config
+sudo chown -R jackett:mediacenter ${ROOT_DIR:-.}/config/jackett-config
+sudo chown -R overseerr:mediacenter ${ROOT_DIR:-.}/config/overseerr-config
+sudo chown -R plex:mediacenter ${ROOT_DIR:-.}/config/plex-config
+sudo chown -R $UID:mediacenter ${ROOT_DIR:-.}/config/jellyfin-config
+sudo chown -R $UID:mediacenter ${ROOT_DIR:-.}/config/tautulli-config
+sudo chown -R sabnzbd:mediacenter ${ROOT_DIR:-.}/config/sabnzbd-config
+sudo chown -R jellyseerr:mediacenter ${ROOT_DIR:-.}/config/jellyseerr-config
+sudo chown -R bazarr:mediacenter ${ROOT_DIR:-.}/config/bazarr-config
+sudo chown -R audiobookshelf:mediacenter ${ROOT_DIR:-.}/config/audiobookshelf-config
 
 echo "Done! It is recommended to reboot now."
