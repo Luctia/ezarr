@@ -245,7 +245,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/config/sabnzbd-config:/config
-      - ${ROOT_DIR}/data/usenet:/downloads
+      - ${ROOT_DIR}/data/usenet:/data/usenet
     ports:
       - "8081:8080"
     restart: unless-stopped

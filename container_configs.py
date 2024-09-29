@@ -280,7 +280,7 @@ class ContainerConfig:
             '      - TZ=' + self.timezone + '\n'
             '    volumes:\n'
             '      - ' + self.config_dir + '/sabnzbd-config:/config\n'
-            '      - ' + self.usenet_dir + ':/downloads\n'
+            '      - ' + self.usenet_dir + ':/data/usenet\n'
             '    ports:\n'
             '      - "8081:8080"\n'
             '    restart: unless-stopped\n\n'
