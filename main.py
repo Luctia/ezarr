@@ -1,3 +1,4 @@
+import os
 from container_configs import ContainerConfig
 from users_groups_setup import UserGroupSetup
 
@@ -31,6 +32,14 @@ def take_directory_input():
             return ans
         print('Please make sure the path is absolute, meaning it starts at the root of your filesystem and starts with "/":', end=' ')
 
+def get_system_timezone():
+    tz_path = "/etc/localtime"
+
+    if os.path.exists(tz_path):
+        if os.path.islink(tz_path):
+            tz = os.readlink(tz_path)
+            return tz.split('zoneinfo/')[-1]
+    return None
 
 print('Welcome to the EZarr CLI.')
 print('This CLI will ask you which services you\'d like to use and more. If you\'d like more information about a '
@@ -114,9 +123,9 @@ print('\n===CONFIGURATION===')
 print('Please enter your timezone (like "Europe/Amsterdam") or press enter to use your system\'s configured timezone:', end=' ')
 timezone = input()
 if (timezone == ''):
-    timezone = open("/etc/timezone", "r").readline()
+    timezone = get_system_timezone()
 
-if len(timezone) == 0: # if user pressed enter and reading timezone from /etc/timezone failed then default to Amsterdam
+if len(timezone) == 0: # if user pressed enter and reading timezone from /etc/localtime failed then default to Amsterdam
     timezone = 'Europe/Amsterdam'
 
 plex_claim = ''
@@ -149,7 +158,7 @@ if generate_permissions:
             getattr(permission_setup, service)()
         except AttributeError:
             pass
-else: 
+else:
     print("Permission and folder structure generation skipped by user.")
 
 
