@@ -119,7 +119,7 @@ class ContainerConfig:
             '      - TZ=' + self.timezone + '\n'
             '    volumes:\n'
             '      - ' + self.config_dir + '/bazarr-config:/config\n'
-            '      - ' + self.root_dir + '/data/media:/media\n'
+            '      - ' + self.root_dir + '/data/media:/data/media\n'
             '    ports:\n'
             '      - "6767:6767"\n'
             '    restart: unless-stopped\n\n'
