@@ -99,7 +99,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/config/bazarr-config:/config
-      - ${ROOT_DIR}/data/media:/media
+      - ${ROOT_DIR}/data/media:/data/media
     ports:
       - "6767:6767"
     restart: unless-stopped
