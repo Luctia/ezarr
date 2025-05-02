@@ -59,6 +59,8 @@ print('Use Mylar3? [Y/n]', end=" ")
 take_input('mylar3', 'servarr')
 print('Use Audiobookshelf? [Y/n]', end=" ")
 take_input('audiobookshelf', 'servarr')
+print('Use Homarr? [Y/n]', end=" ")
+take_input('homarr', 'servarr')
 if len(services_classed['servarr']) == 0:
     print('Warning: no media management services selected.')
 if services_classed['servarr'].__contains__('sonarr') or services_classed['servarr'].__contains__('radarr'):
@@ -122,7 +124,7 @@ print('\n===CONFIGURATION===')
 
 print('Please enter your timezone (like "Europe/Amsterdam") or press enter to use your system\'s configured timezone:', end=' ')
 timezone = input()
-if (timezone == ''):
+if timezone == '':
     timezone = get_system_timezone()
 
 if len(timezone) == 0: # if user pressed enter and reading timezone from /etc/localtime failed then default to Amsterdam

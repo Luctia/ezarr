@@ -19,6 +19,7 @@ It's set up to follow the [TRaSH guidelines](https://trash-guides.info/Hardlinks
   the process within Prowlarr is the same as for the other containers (add app). You'll have to add
   an API key within Mylar3, yourself.
 - [Audiobookshelf](https://www.audiobookshelf.org/) is a self-hosted audiobook and podcast server.
+- [Homarr](https://homarr.dev/) is _a sleek, modern dashboard that puts all of your apps and services at your fingertips._
 - [Prowlarr](https://wiki.servarr.com/prowlarr) can keep track of indexers, which are services that
   keep track of Torrent or UseNet links. One can search an indexer for certain content and find a
   where to download this. **Note**: when adding an indexer, please do not set the "seed ratio" to
@@ -42,8 +43,8 @@ It's set up to follow the [TRaSH guidelines](https://trash-guides.info/Hardlinks
 - [Jellyseerr](https://github.com/Fallenbagel/jellyseerr) is like Overseerr, but for Jellyfin.
 
 ## Requirements
-Currently this script only works on Linux. There is a chance that the sample docker compose file will work on Windows, although untested.
-The only requirements other than that are **Python 3** and **docker** with **docker-compose-v2**.
+Currently, this script only works on Linux. There is a chance that the sample docker compose file will work on Windows,
+although untested. The only requirements other than that are **Python 3** and **docker** with **docker-compose-v2**.
 While this script _may_ work on docker-compose-v1 it's made to be and highly recommended to be run using v2.
 The easiest way to install these dependencies on Ubuntu and other Debian-based distors is by running:
 ```
@@ -73,7 +74,8 @@ If you're coming from an older version or reinstalling with different IDs, run `
 6. Take a look at the `docker-compose.yml` file. If there are services you would like to ignore
    (for example, running PleX and Jellyfin at the same time is a bit unusual), you can comment them
    out by placing `#` in front of the lines. This ensures they are ignored by Docker compose. 
-   Double check that your .env file is set up properly.
+   Double check that your .env file is set up properly. Also make sure to add a newly generated encryption key to the
+   Homarr section, if you want to use it.
 7. Run `docker compose up -d` to start the containers. If it complains about permissions run the following commands to add your current user to the docker group and apply changes:
     ```
     sudo groupadd docker

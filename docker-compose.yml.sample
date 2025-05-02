@@ -145,6 +145,18 @@ services:
     ports:
       - "9696:9696"
     restart: unless-stopped
+
+  homarr:
+    container_name: homarr
+    image: ghcr.io/homarr-labs/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
+      - ./homarr/appdata:/appdata
+    environment:
+      - SECRET_ENCRYPTION_KEY=
+    ports:
+      - "7575:7575"
   
   jackett:
     image: lscr.io/linuxserver/jackett:latest

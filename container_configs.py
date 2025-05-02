@@ -17,6 +17,7 @@ class ContainerConfig:
         self.comic_dir = root_dir + '/media/comics'
         self.torrent_dir = root_dir + '/data/torrents'
         self.usenet_dir = root_dir + '/data/usenet'
+        self.homarr_dir = root_dir + '/data/homarr/appdata'
         self.UID = os.popen('id -u').read().rstrip('\n')
 
     def plex(self):
@@ -210,6 +211,22 @@ class ContainerConfig:
             '      - ' + self.config_dir + '/prowlarr-config:/config\n'
             '    ports:\n'
             '      - "9696:9696"\n'
+            '    restart: unless-stopped\n\n'
+        )
+
+    def homarr(self):
+        key = os.urandom(124).hex()
+        return (
+            '  homarr:\n'
+            '    image: ghcr.io/homarr-labs/homarr:latest\n'
+            '    container_name: homarr\n'
+            '    environment:\n'
+            '      - SECRET_ENCRYPTION_KEY=' + key + '\n'
+            '    volumes:\n'
+            '      - ' + self.homarr_dir + ':/appdata\n'
+            '      - /var/run/docker.sock:/var/run/docker.sock\n'
+            '    ports:\n'
+            '      - "7575:7575"\n'
             '    restart: unless-stopped\n\n'
         )
 
