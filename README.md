@@ -1,4 +1,4 @@
-# EZARR
+# Ezarr
 [![Check running](https://github.com/Luctia/ezarr/actions/workflows/check_running.yml/badge.svg)](https://github.com/Luctia/ezarr/actions/workflows/check_running.yml)
 
 Ezarr is a project built to make it EZ to deploy a Servarr mediacenter on an Ubuntu server. The
