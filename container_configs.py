@@ -215,7 +215,7 @@ class ContainerConfig:
         )
 
     def homarr(self):
-        key = os.urandom(124).hex()
+        key = os.urandom(32).hex()  # Because os.urandom(32) generates 32 random bytes, and .hex() converts each byte into two hexadecimal characters.
         return (
             '  homarr:\n'
             '    image: ghcr.io/homarr-labs/homarr:latest\n'
