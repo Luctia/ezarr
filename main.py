@@ -58,7 +58,7 @@ def main():
     take_input('homarr', 'servarr')
     if len(services_classed['servarr']) == 0:
         print('Warning: no media management services selected.')
-    if 'sonarr' in services_classed['servarr'] or 'radrr' in services_classed['servarr']:
+    if 'sonarr' in services_classed['servarr'] or 'radarr' in services_classed['servarr']:
         take_input('bazarr', 'servarr')
 
     print('\n===INDEXERS===')
