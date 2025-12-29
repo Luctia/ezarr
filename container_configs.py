@@ -1,5 +1,5 @@
 import getpass
-import os 
+import os
 import pwd
 
 class ContainerConfig:
@@ -143,24 +143,6 @@ class ContainerConfig:
             f'      - {self.root_dir}/data:/data\n'
             '    ports:\n'
             '      - "8686:8686"\n'
-            '    restart: unless-stopped\n\n'
-        )
-
-    def readarr(self):
-        return (
-            '  readarr:\n'
-            '    image: lscr.io/linuxserver/readarr:develop\n'
-            '    container_name: readarr\n'
-            '    environment:\n'
-            '      - PUID=13004\n'
-            '      - PGID=13000\n'
-            '      - UMASK=002\n'
-            f'      - TZ={self.timezone}\n'
-            '    volumes:\n'
-            f'      - {self.config_dir}/readarr-config:/config\n'
-            f'      - {self.root_dir}/data:/data\n'
-            '    ports:\n'
-            '      - "8787:8787"\n'
             '    restart: unless-stopped\n\n'
         )
 

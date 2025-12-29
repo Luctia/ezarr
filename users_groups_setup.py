@@ -51,15 +51,6 @@ class UserGroupSetup:
         self.create_config_dir('lidarr')
         os.system('sudo usermod -a -G mediacenter lidarr')
 
-    def readarr(self):
-        os.system(
-            '/bin/bash -c "sudo useradd readarr -u 13004'
-            ' ; sudo mkdir -pv ' + self.root_dir + '/data/{media,usenet,torrents}/books -m 775'
-            ' ; sudo chown -R readarr:mediacenter ' + self.root_dir + '/data/{media,usenet,torrents}/books"'
-        )
-        self.create_config_dir('readarr')
-        os.system('sudo usermod -a -G mediacenter readarr')
-
     def mylar3(self):
         os.system(
             '/bin/bash -c "sudo useradd mylar -u 13005'

@@ -52,7 +52,6 @@ def main():
     take_input('sonarr', 'servarr')
     take_input('radarr', 'servarr')
     take_input('lidarr', 'servarr')
-    take_input('readarr', 'servarr')
     take_input('mylar3', 'servarr')
     take_input('audiobookshelf', 'servarr')
     take_input('homarr', 'servarr')

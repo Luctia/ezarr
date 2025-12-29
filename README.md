@@ -13,7 +13,6 @@ It's set up to follow the [TRaSH guidelines](https://trash-guides.info/Hardlinks
 - [Bazarr](https://www.bazarr.media/) is a companion application to Sonarr and Radarr that manages
   and downloads subtitles based on your requirements.
 - [Lidarr](https://lidarr.audio/) is like Sonarr, but for music.
-- [Readarr](https://readarr.com/) is like Sonarr, but for books.
 - [Mylar3](https://github.com/mylar3/mylar3) is like Sonarr, but for comic books. This one is a bit
   tricky to set up, so do so at your own risk. In order to connect this to your Prowlarr container,
   the process within Prowlarr is the same as for the other containers (add app). You'll have to add

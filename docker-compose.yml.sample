@@ -46,21 +46,6 @@ services:
       - "8686:8686"
     restart: unless-stopped
 
-  readarr:
-    image: lscr.io/linuxserver/readarr:develop
-    container_name: readarr
-    environment:
-      - PUID=${READARR_UID}
-      - PGID=${MEDIACENTER_GID}
-      - UMASK=002
-      - TZ=${TIMEZONE}
-    volumes:
-      - ${ROOT_DIR}/config/readarr-config:/config
-      - ${ROOT_DIR}/data:/data
-    ports:
-      - "8787:8787"
-    restart: unless-stopped
-
   mylar3:
     image: lscr.io/linuxserver/mylar3:latest
     container_name: mylar3
