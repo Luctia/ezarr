@@ -89,32 +89,21 @@ services:
       - "6767:6767"
     restart: unless-stopped
 
-  overseerr:
-    image: sctx/overseerr:latest
-    container_name: overseerr
+  seerr:
+    image: ghcr.io/seerr-team/seerr:latest
+    init: true
+    container_name: seerr
     environment:
-      - PUID=${OVERSEERR_UID}
-      - PGID=${MEDIACENTER_GID}
-      - UMASK=002
+      # Seerr does not recommend using non-default UID/GID.
+      # See the migration documentation and GitHub Issue:
+      # https://docs.seerr.dev/migration-guide/?kubernetes-values=old#config-folder-permissions
+      # https://github.com/seerr-team/seerr/discussions/2455
       - TZ=${TIMEZONE}
+      - LOG_LEVEL=debug
     volumes:
-      - ${ROOT_DIR}/config/overseerr-config:/app/config
+      - ${ROOT_DIR}/config/seerr-config:/app/config
     ports:
       - "5055:5055"
-    restart: unless-stopped
-
-  jellyseerr:
-    image: fallenbagel/jellyseerr:latest
-    container_name: jellyseerr
-    environment:
-      - PUID=${JELLYSEERR_UID}
-      - PGID=${MEDIACENTER_GID}
-      - UMASK=002
-      - TZ=${TIMEZONE}
-    volumes:
-      - ${ROOT_DIR}/config/jellyseerr-config:/app/config
-    ports:
-      - "5056:5055"
     restart: unless-stopped
 
   prowlarr:
