@@ -17,10 +17,8 @@ sudo useradd mylar -u $MYLAR_UID
 sudo useradd prowlarr -u $PROWLARR_UID
 sudo useradd qbittorrent -u $QBITTORRENT_UID
 sudo useradd jackett -u $JACKETT_UID
-sudo useradd overseerr -u $OVERSEERR_UID
 sudo useradd plex -u $PLEX_UID
 sudo useradd sabnzbd -u $SABNZBD_UID
-sudo useradd jellyseerr -u $JELLYSEERR_UID
 sudo useradd bazarr -u $BAZARR_UID
 sudo useradd audiobookshelf -u $AUDIOBOOKSHELF_UID
 sudo groupadd mediacenter -g $MEDIACENTER_GID
@@ -39,16 +37,14 @@ sudo usermod -a -G mediacenter mylar
 sudo usermod -a -G mediacenter prowlarr
 sudo usermod -a -G mediacenter qbittorrent
 sudo usermod -a -G mediacenter jackett
-sudo usermod -a -G mediacenter overseerr
 sudo usermod -a -G mediacenter plex
 sudo usermod -a -G mediacenter sabnzbd
-sudo usermod -a -G mediacenter jellyseerr
 sudo usermod -a -G mediacenter bazarr
 sudo usermod -a -G mediacenter audiobookshelf
 
 # Make directories
 # ${ROOT_DIR:-.}/ means take the value from ROOT_DIR value, if failed or empty place it in the current folder
-sudo mkdir -pv ${ROOT_DIR:-.}/config/{sonarr,radarr,lidarr,mylar,prowlarr,qbittorrent,jackett,audiobookshelf,overseerr,plex,jellyfin,tautulli,sabnzbd,jellyseerr,bazarr}-config
+sudo mkdir -pv ${ROOT_DIR:-.}/config/{sonarr,radarr,lidarr,mylar,prowlarr,qbittorrent,jackett,audiobookshelf,seerr,plex,jellyfin,tautulli,sabnzbd,bazarr}-config
 sudo mkdir -pv ${ROOT_DIR:-.}/data/{torrents,usenet,media}/{tv,movies,music,books,comics,audiobooks,podcasts,audiobookshelf-metadata}
 
 # Set permissions
@@ -63,12 +59,14 @@ sudo chown -R mylar:mediacenter ${ROOT_DIR:-.}/config/mylar-config
 sudo chown -R prowlarr:mediacenter ${ROOT_DIR:-.}/config/prowlarr-config
 sudo chown -R qbittorrent:mediacenter ${ROOT_DIR:-.}/config/qbittorrent-config
 sudo chown -R jackett:mediacenter ${ROOT_DIR:-.}/config/jackett-config
-sudo chown -R overseerr:mediacenter ${ROOT_DIR:-.}/config/overseerr-config
+
+# The Seerr container uses 1000:1000
+# See https://docs.seerr.dev/migration-guide/?kubernetes-values=old#config-folder-permissions
+sudo chown -R $UID:$GID ${ROOT_DIR:-.}/config/seerr-config
 sudo chown -R plex:mediacenter ${ROOT_DIR:-.}/config/plex-config
 sudo chown -R $UID:mediacenter ${ROOT_DIR:-.}/config/jellyfin-config
 sudo chown -R $UID:mediacenter ${ROOT_DIR:-.}/config/tautulli-config
 sudo chown -R sabnzbd:mediacenter ${ROOT_DIR:-.}/config/sabnzbd-config
-sudo chown -R jellyseerr:mediacenter ${ROOT_DIR:-.}/config/jellyseerr-config
 sudo chown -R bazarr:mediacenter ${ROOT_DIR:-.}/config/bazarr-config
 sudo chown -R audiobookshelf:mediacenter ${ROOT_DIR:-.}/config/audiobookshelf-config
 
