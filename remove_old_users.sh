@@ -17,7 +17,6 @@ sudo userdel jackett
 sudo userdel plex
 sudo userdel overseerr
 sudo userdel jellyseerr
-sudo userdel seerr
 sudo userdel qbittorrent
 sudo userdel sabnzbd
 sudo groupdel mediacenter
