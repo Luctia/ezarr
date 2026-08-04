@@ -5,6 +5,8 @@ Ezarr is a project built to make it EZ to deploy a Servarr mediacenter on an Ubu
 badge above means that the shell script and docker-compose file in this repository at least *don't
 crash*. It doesn't necessarily mean it will run well on your system ;) 
 It's set up to follow the [TRaSH guidelines](https://trash-guides.info/Hardlinks/How-to-setup-for/Docker/) so it should at least perform optimally. It features:
+- [Sportarr](https://github.com/Sportarr/Sportarr) is an application to manage sports events, in the
+  style of the Starr family. It monitors leagues and grabs, sorts, and renames broadcasts.
 - [Sonarr](https://sonarr.tv/) is an application to manage TV shows. It is capable of keeping track
   of what you'd like to watch, at what quality, in which language and more, and can find a place to
   download this if connected to Prowlarr and qBittorrent. It can also reorganize the media you
@@ -57,7 +59,7 @@ To make things easier, a CLI has been developed. First, clone the repository in 
 choosing. You can run it by entering `python3 main.py` and the CLI will guide you through the
 process. This is the recommended method if you're setting this up for the first time on a new system. 
 Please take a look at [important notes](#important-notes) before you continue. 
-**NOTE: This script will create users for each container with IDs ranging from 13001 to 13014. 
+**NOTE: This script will create users for each container with IDs ranging from 13001 to 13015. 
 If you want to choose your own IDs (or some of them are occupied) you have to go through the manual install.**
 
 ### Manually

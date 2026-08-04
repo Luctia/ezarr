@@ -6,6 +6,7 @@ sudo docker compose down
 
 # Remove old users and group
 sudo userdel sonarr
+sudo userdel sportarr
 sudo userdel radarr
 sudo userdel lidarr
 sudo userdel readarr

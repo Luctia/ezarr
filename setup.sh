@@ -21,6 +21,7 @@ sudo useradd plex -u $PLEX_UID
 sudo useradd sabnzbd -u $SABNZBD_UID
 sudo useradd bazarr -u $BAZARR_UID
 sudo useradd audiobookshelf -u $AUDIOBOOKSHELF_UID
+sudo useradd sportarr -u $SPORTARR_UID
 sudo groupadd mediacenter -g $MEDIACENTER_GID
 
 # Adds current user to the mediacenter group. This is recommended so that you can still have access to files inside the ezarr folder structure for manual control.
@@ -41,6 +42,7 @@ sudo usermod -a -G mediacenter plex
 sudo usermod -a -G mediacenter sabnzbd
 sudo usermod -a -G mediacenter bazarr
 sudo usermod -a -G mediacenter audiobookshelf
+sudo usermod -a -G mediacenter sportarr
 
 # Make directories
 # ${ROOT_DIR:-.}/ means take the value from ROOT_DIR value, if failed or empty place it in the current folder
