@@ -20,13 +20,13 @@ services:
     image: sportarr/sportarr:latest
     container_name: sportarr
     environment:
-      - PUID=13015
-      - PGID=13000
+      - PUID=${SPORTARR_UID}
+      - PGID=${MEDIACENTER_GID}
       - UMASK=002
-      - TZ=Etc/UTC
+      - TZ=${TIMEZONE}
     volumes:
-      - /opt/ezarr/config/sportarr-config:/config
-      - /opt/ezarr/data:/data
+      - ${ROOT_DIR}/config/sportarr-config:/config
+      - ${ROOT_DIR}/data:/data
     ports:
       - "1867:1867"
     restart: unless-stopped

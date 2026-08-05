@@ -46,8 +46,8 @@ sudo usermod -a -G mediacenter sportarr
 
 # Make directories
 # ${ROOT_DIR:-.}/ means take the value from ROOT_DIR value, if failed or empty place it in the current folder
-sudo mkdir -pv ${ROOT_DIR:-.}/config/{sonarr,radarr,lidarr,mylar,prowlarr,qbittorrent,jackett,audiobookshelf,seerr,plex,jellyfin,tautulli,sabnzbd,bazarr}-config
-sudo mkdir -pv ${ROOT_DIR:-.}/data/{torrents,usenet,media}/{tv,movies,music,books,comics,audiobooks,podcasts,audiobookshelf-metadata}
+sudo mkdir -pv ${ROOT_DIR:-.}/config/{sonarr,radarr,lidarr,mylar,prowlarr,qbittorrent,jackett,audiobookshelf,seerr,plex,jellyfin,tautulli,sabnzbd,bazarr,sportarr}-config
+sudo mkdir -pv ${ROOT_DIR:-.}/data/{torrents,usenet,media}/{tv,movies,music,books,comics,audiobooks,podcasts,audiobookshelf-metadata,sports}
 
 # Set permissions
 sudo chmod -R 775 ${ROOT_DIR:-.}/data/
@@ -71,5 +71,6 @@ sudo chown -R $UID:mediacenter ${ROOT_DIR:-.}/config/tautulli-config
 sudo chown -R sabnzbd:mediacenter ${ROOT_DIR:-.}/config/sabnzbd-config
 sudo chown -R bazarr:mediacenter ${ROOT_DIR:-.}/config/bazarr-config
 sudo chown -R audiobookshelf:mediacenter ${ROOT_DIR:-.}/config/audiobookshelf-config
+sudo chown -R sportarr:mediacenter ${ROOT_DIR:-.}/config/sportarr-config
 
 echo "Done! It is recommended to reboot now."
