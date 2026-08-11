@@ -50,6 +50,7 @@ def main():
     print('\n===SERVARR===')
     services_classed['servarr'] = []
     take_input('sonarr', 'servarr')
+    take_input('sportarr', 'servarr')
     take_input('radarr', 'servarr')
     take_input('lidarr', 'servarr')
     take_input('mylar3', 'servarr')

@@ -28,6 +28,15 @@ class UserGroupSetup:
         self.create_config_dir('sonarr')
         os.system('sudo usermod -a -G mediacenter sonarr')
 
+    def sportarr(self):
+        os.system(
+            '/bin/bash -c "sudo useradd sportarr -u 13015'
+            ' ; sudo mkdir -pv ' + self.root_dir + '/data/{media,usenet,torrents}/sports -m 775'
+            ' ; sudo chown -R sportarr:mediacenter ' + self.root_dir + '/data/{media,usenet,torrents}/sports"'
+        )
+        self.create_config_dir('sportarr')
+        os.system('sudo usermod -a -G mediacenter sportarr')
+
     def radarr(self):
         os.system(
             '/bin/bash -c "sudo useradd radarr -u 13002'

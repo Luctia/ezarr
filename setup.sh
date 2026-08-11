@@ -21,6 +21,7 @@ sudo useradd plex -u $PLEX_UID
 sudo useradd sabnzbd -u $SABNZBD_UID
 sudo useradd bazarr -u $BAZARR_UID
 sudo useradd audiobookshelf -u $AUDIOBOOKSHELF_UID
+sudo useradd sportarr -u $SPORTARR_UID
 sudo groupadd mediacenter -g $MEDIACENTER_GID
 
 # Adds current user to the mediacenter group. This is recommended so that you can still have access to files inside the ezarr folder structure for manual control.
@@ -41,11 +42,12 @@ sudo usermod -a -G mediacenter plex
 sudo usermod -a -G mediacenter sabnzbd
 sudo usermod -a -G mediacenter bazarr
 sudo usermod -a -G mediacenter audiobookshelf
+sudo usermod -a -G mediacenter sportarr
 
 # Make directories
 # ${ROOT_DIR:-.}/ means take the value from ROOT_DIR value, if failed or empty place it in the current folder
-sudo mkdir -pv ${ROOT_DIR:-.}/config/{sonarr,radarr,lidarr,mylar,prowlarr,qbittorrent,jackett,audiobookshelf,seerr,plex,jellyfin,tautulli,sabnzbd,bazarr}-config
-sudo mkdir -pv ${ROOT_DIR:-.}/data/{torrents,usenet,media}/{tv,movies,music,books,comics,audiobooks,podcasts,audiobookshelf-metadata}
+sudo mkdir -pv ${ROOT_DIR:-.}/config/{sonarr,radarr,lidarr,mylar,prowlarr,qbittorrent,jackett,audiobookshelf,seerr,plex,jellyfin,tautulli,sabnzbd,bazarr,sportarr}-config
+sudo mkdir -pv ${ROOT_DIR:-.}/data/{torrents,usenet,media}/{tv,movies,music,books,comics,audiobooks,podcasts,audiobookshelf-metadata,sports}
 
 # Set permissions
 sudo chmod -R 775 ${ROOT_DIR:-.}/data/
@@ -69,5 +71,6 @@ sudo chown -R $UID:mediacenter ${ROOT_DIR:-.}/config/tautulli-config
 sudo chown -R sabnzbd:mediacenter ${ROOT_DIR:-.}/config/sabnzbd-config
 sudo chown -R bazarr:mediacenter ${ROOT_DIR:-.}/config/bazarr-config
 sudo chown -R audiobookshelf:mediacenter ${ROOT_DIR:-.}/config/audiobookshelf-config
+sudo chown -R sportarr:mediacenter ${ROOT_DIR:-.}/config/sportarr-config
 
 echo "Done! It is recommended to reboot now."

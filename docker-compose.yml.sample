@@ -16,6 +16,21 @@ services:
       - "8989:8989"
     restart: unless-stopped
 
+  sportarr:
+    image: sportarr/sportarr:latest
+    container_name: sportarr
+    environment:
+      - PUID=${SPORTARR_UID}
+      - PGID=${MEDIACENTER_GID}
+      - UMASK=002
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${ROOT_DIR}/config/sportarr-config:/config
+      - ${ROOT_DIR}/data:/data
+    ports:
+      - "1867:1867"
+    restart: unless-stopped
+
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr

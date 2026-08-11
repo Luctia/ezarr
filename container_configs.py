@@ -93,6 +93,24 @@ class ContainerConfig:
             '    restart: unless-stopped\n\n'
         )
 
+    def sportarr(self):
+        return (
+            '  sportarr:\n'
+            '    image: sportarr/sportarr:latest\n'
+            '    container_name: sportarr\n'
+            '    environment:\n'
+            '      - PUID=13015\n'
+            '      - PGID=13000\n'
+            '      - UMASK=002\n'
+            f'      - TZ={self.timezone}\n'
+            '    volumes:\n'
+            f'      - {self.config_dir}/sportarr-config:/config\n'
+            f'      - {self.root_dir}/data:/data\n'
+            '    ports:\n'
+            '      - "1867:1867"\n'
+            '    restart: unless-stopped\n\n'
+        )
+
     def radarr(self):
         return (
             '  radarr:\n'
